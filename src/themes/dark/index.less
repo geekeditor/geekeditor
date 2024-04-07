@@ -1,0 +1,25 @@
+@import './common.less';
+@import './app.less';
+
+html.dark-mode {
+    @import '~antd/dist/antd.dark.less';
+
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+        background-color: transparent;
+        transition: none;
+        border-color: #434343;
+    }
+    .ant-radio-button-wrapper-checked {
+        border-color: #434343 !important;
+
+        &::before {
+            background-color: #434343 !important;
+        }
+    }
+
+    .ant-select-item-option-selected,
+    .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+        background-color: var(--active-background-color) !important;
+    }
+    
+}

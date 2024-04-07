@@ -1,0 +1,70 @@
+.docs-config-bar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .docs-config-bar-header {
+        height: 31px;
+        display: flex;
+        overflow: hidden;
+        background-color: var(--background-color);
+        justify-content: space-between;
+        padding: 0px 10px;
+
+        .docs-config-bar-title {
+            height: 100%;
+            width: 110px;
+            padding-left: 10px;
+            white-space: nowrap;
+            color: var(--color);
+            display: flex;
+            align-items: center;
+
+            .icon {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .docs-config-bar-ops {
+        height: 30px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: var(--background-color);
+        .bar-item {
+            width: 15px;
+            height: 15px;
+            font-size: 15px;
+        }
+
+        .bar-item:not(:first-child) {
+            margin-left: 15px;
+        }
+    }
+
+    .docs-config-bar-providers {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        position: relative;
+    }
+
+    .docs-empty-repo {
+        padding: 30px 0px;
+    }
+
+    .docs-config-bar-unloaded {
+        padding: 30px 0px;
+        font-size: 10px;
+        text-align: center;
+        color: #cccccc;
+
+        span {
+            color: #388ae5;
+            font-size: 10px;
+            cursor: pointer;
+        }
+    }
+}

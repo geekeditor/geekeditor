@@ -1,0 +1,6 @@
+
+dist
+node_modules
+public/static/js
+public/static/css
+public/workspace1.x.html

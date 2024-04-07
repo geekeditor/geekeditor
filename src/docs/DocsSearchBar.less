@@ -1,0 +1,93 @@
+.docs-search-bar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .docs-search-bar-header {
+        display: flex;
+        padding: 0px 10px;
+        height: 44px;
+        align-items: center;
+        background-color: var(--background-color);
+
+        
+
+        .ant-input-search {
+
+            .ant-input {
+                height: 32px;
+                border-radius: 16px !important;
+                
+            }
+
+            .ant-input-group-addon {
+                display: none; 
+            }
+        }
+
+        
+
+        
+    }
+
+    .docs-search-bar-body {
+        flex: 1;
+        overflow: auto;
+        display: none;
+
+        &--show {
+            display: block;
+        }
+
+        .docs-search-result-item {
+            border-bottom: 1px solid;
+            border-color: var(--border-color);
+            padding: 0px 20px;
+            box-sizing: border-box;
+            cursor: pointer;
+
+            .docs-search-result-item-info {
+                height: 30px;
+                line-height: 30px;
+                position: relative;
+                font-size: 14px;
+                box-sizing: border-box;
+                color: var(--color);
+                background-color: var(--background-color);
+                text-overflow: ellipsis;
+                overflow: hidden;
+
+                .search-mark {
+                    color: #388ae5;
+                }
+
+                .docs-search-result-item-icon {
+                    margin-right: 5px;
+                    font-size: 12px;
+                }
+            }
+
+            .docs-search-result-item-path {
+                font-size: 10px;
+                color: #999;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding: 2px 0px;
+                font-style: italic;
+            }
+
+            
+        }
+    }
+
+    .docs-search-bar-children {
+        flex: 1;
+        overflow: auto;
+        display: none;
+
+        &--show {
+            display: block;
+        }
+    }
+}

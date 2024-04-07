@@ -1,0 +1,330 @@
+@import "variables";
+
+@font-face {
+  font-family: '@{icomoon-font-family}';
+  src:  url('@{icomoon-font-path}/@{icomoon-font-family}.eot?bop3uv');
+  src:  url('@{icomoon-font-path}/@{icomoon-font-family}.eot?bop3uv#iefix') format('embedded-opentype'),
+    url('@{icomoon-font-path}/@{icomoon-font-family}.ttf?bop3uv') format('truetype'),
+    url('@{icomoon-font-path}/@{icomoon-font-family}.woff?bop3uv') format('woff'),
+    url('@{icomoon-font-path}/@{icomoon-font-family}.svg?bop3uv#@{icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="gei-"], [class*=" gei-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '@{icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.gei-format {
+  &:before {
+    content: @gei-format; 
+  }
+}
+.gei-text {
+  &:before {
+    content: @gei-text; 
+  }
+}
+.gei-regex {
+  &:before {
+    content: @gei-regex; 
+  }
+}
+.gei-insert-line-after {
+  &:before {
+    content: @gei-insert-line-after; 
+  }
+}
+.gei-insert-line-before {
+  &:before {
+    content: @gei-insert-line-before; 
+  }
+}
+.gei-footnote {
+  &:before {
+    content: @gei-footnote; 
+  }
+}
+.gei-arrow-down {
+  &:before {
+    content: @gei-arrow-down; 
+  }
+}
+.gei-arrow-up {
+  &:before {
+    content: @gei-arrow-up; 
+  }
+}
+.gei-backcolor {
+  &:before {
+    content: @gei-backcolor; 
+  }
+}
+.gei-cross {
+  &:before {
+    content: @gei-cross; 
+  }
+}
+.gei-dots {
+  &:before {
+    content: @gei-dots; 
+  }
+}
+.gei-card {
+  &:before {
+    content: @gei-card; 
+  }
+}
+.gei-link {
+  &:before {
+    content: @gei-link; 
+  }
+}
+.gei-plus {
+  &:before {
+    content: @gei-plus; 
+  }
+}
+.gei-sad-face {
+  &:before {
+    content: @gei-sad-face; 
+  }
+}
+.gei-toggler-down {
+  &:before {
+    content: @gei-toggler-down; 
+  }
+}
+.gei-unlink {
+  &:before {
+    content: @gei-unlink; 
+  }
+}
+.gei-juejin {
+  &:before {
+    content: @gei-juejin; 
+  }
+}
+.gei-redo {
+  &:before {
+    content: @gei-redo; 
+  }
+}
+.gei-undo {
+  &:before {
+    content: @gei-undo; 
+  }
+}
+.gei-crop {
+  &:before {
+    content: @gei-crop; 
+  }
+}
+.gei-autotypeset {
+  &:before {
+    content: @gei-autotypeset; 
+  }
+}
+.gei-copy {
+  &:before {
+    content: @gei-copy; 
+  }
+}
+.gei-export {
+  &:before {
+    content: @gei-export; 
+  }
+}
+.gei-search {
+  &:before {
+    content: @gei-search; 
+  }
+}
+.gei-content {
+  &:before {
+    content: @gei-content; 
+  }
+}
+.gei-catalog {
+  &:before {
+    content: @gei-catalog; 
+  }
+}
+.gei-phone {
+  &:before {
+    content: @gei-phone; 
+  }
+}
+.gei-screen {
+  &:before {
+    content: @gei-screen; 
+  }
+}
+.gei-typography {
+  &:before {
+    content: @gei-typography; 
+  }
+}
+.gei-replace-all {
+  &:before {
+    content: @gei-replace-all; 
+  }
+}
+.gei-replace {
+  &:before {
+    content: @gei-replace; 
+  }
+}
+.gei-copy-add {
+  &:before {
+    content: @gei-copy-add; 
+  }
+}
+.gei-edit {
+  &:before {
+    content: @gei-edit; 
+  }
+}
+.gei-check {
+  &:before {
+    content: @gei-check; 
+  }
+}
+.gei-official-account {
+  &:before {
+    content: @gei-official-account; 
+  }
+}
+.gei-gitee {
+  &:before {
+    content: @gei-gitee; 
+  }
+}
+.gei-zhihu {
+  &:before {
+    content: @gei-zhihu; 
+  }
+}
+.gei-kbd {
+  &:before {
+    content: @gei-kbd; 
+  }
+}
+.gei-quote {
+  &:before {
+    content: @gei-quote; 
+  }
+}
+.gei-dark-mode {
+  &:before {
+    content: @gei-dark-mode; 
+  }
+}
+.gei-keyword-count {
+  &:before {
+    content: @gei-keyword-count; 
+  }
+}
+.gei-arrow {
+  &:before {
+    content: @gei-arrow; 
+  }
+}
+.gei-math {
+  &:before {
+    content: @gei-math; 
+  }
+}
+.gei-fontcolor {
+  &:before {
+    content: @gei-fontcolor; 
+  }
+}
+.gei-mark {
+  &:before {
+    content: @gei-mark; 
+  }
+}
+.gei-removeformat {
+  &:before {
+    content: @gei-removeformat; 
+  }
+}
+.gei-bin {
+  &:before {
+    content: @gei-bin; 
+  }
+}
+.gei-bold {
+  &:before {
+    content: @gei-bold; 
+  }
+}
+.gei-underline {
+  &:before {
+    content: @gei-underline; 
+  }
+}
+.gei-italic {
+  &:before {
+    content: @gei-italic; 
+  }
+}
+.gei-strikethrough {
+  &:before {
+    content: @gei-strikethrough; 
+  }
+}
+.gei-superscript {
+  &:before {
+    content: @gei-superscript; 
+  }
+}
+.gei-subscript {
+  &:before {
+    content: @gei-subscript; 
+  }
+}
+.gei-code {
+  &:before {
+    content: @gei-code; 
+  }
+}
+.gei-inlinecode {
+  &:before {
+    content: @gei-inlinecode; 
+  }
+}
+.gei-align-left {
+  &:before {
+    content: @gei-align-left; 
+  }
+}
+.gei-align-center {
+  &:before {
+    content: @gei-align-center; 
+  }
+}
+.gei-align-right {
+  &:before {
+    content: @gei-align-right; 
+  }
+}
+.gei-align-justify {
+  &:before {
+    content: @gei-align-justify; 
+  }
+}
+

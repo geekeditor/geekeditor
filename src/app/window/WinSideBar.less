@@ -1,0 +1,41 @@
+.win-side-bar {
+    border-left: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+
+    .win-side-bar-header {
+        display: flex;
+        height: 31px;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        -webkit-app-region: drag;
+
+        .side-bar-item {
+            height: 30px;
+            width: 30px;
+            font-size: 16px;
+
+            &:not(:first-child) {
+                margin-left: 5px;
+            }
+        }
+        
+
+    }
+
+    .win-side-bar-tabs {
+        flex: 1;
+        overflow: auto;
+
+        .win-side-bar-tab__docs, .win-side-bar-tab__hotkeys, .win-side-bar-tab__records {
+            height: 100%;
+        }
+    }
+}
+
+.win-side-bar.open {
+    right: 0px;
+}

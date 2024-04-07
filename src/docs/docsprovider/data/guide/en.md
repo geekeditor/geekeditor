@@ -39,3 +39,104 @@ It supports the export of Image, PDF, HTML, Textbundle, Markdown, TXT and other 
 #### 1.6 Backup encryption configuration
 
 Support password encryption configuration backup to local or cloud, facilitating cross device writing.
+
+## 2. Markdown Syntax Guide
+
+#### 2.1 CommonMark
+
+**strong** *emphasis* `inline code` &gt; <u>underline</u> <mark>highlight</mark> <ruby>GeekEditor<rt>ji ke bian ji qi</rt></ruby> [GeekEditor](https://www.geekeditor.com) H0~2~ X^5^
+
+
+- Bullet list
+    - Bullet list
+
+
+0. Order list
+    0. Order list
+
+
+```javascript
+function add(a, b) {
+    return a + b;
+}
+```
+
+
+<div>HTML block</div>
+
+
+> Quote block
+
+
+---
+
+#### 2.2 GFM
+
+:man:  ~~del~~ http://google.com $a + b$
+
+
+
+- [x] Todo item
+
+- [ ] Todo item
+
+
+| Name | Sex | Age |
+| ---- | --- | --- |
+| Geek | Male | 6 |
+
+
+#### 2.3 Extension
+
+$$
+a + b = c
+$$
+
+
+```mermaid
+mindmap
+  root((mindmap))
+    Origins
+      Long history
+      ::icon(fa fa-book)
+      Popularisation
+        British popular psychology author Tony Buzan
+    Research
+      On effectiveness<br/>and features
+      On Automatic creation
+        Uses
+            Creative techniques
+            Strategic planning
+            Argument mapping
+    Tools
+      Pen and paper
+      Mermaid
+```
+
+
+```flowchart
+st=>start: Start:>http://www.google.com[blank]
+e=>end:>http://www.google.com
+op1=>operation: My Operation
+sub1=>subroutine: My Subroutine
+cond=>condition: Yes
+or No?:>http://www.google.com
+io=>inputoutput: catch something...
+para=>parallel: parallel tasks
+
+st->op1->cond
+cond(yes)->io->e
+cond(no)->para
+para(path1, bottom)->sub1(right)->op1
+para(path2, top)->op1
+```
+
+```vega-lite
+```
+
+```plantuml
+@startuml
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+@enduml
+```

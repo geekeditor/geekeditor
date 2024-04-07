@@ -1,0 +1,120 @@
+.docs {
+    height: 100%;
+    box-sizing: border-box;
+
+    .docs-nav {
+        height: 30px;
+        display: flex;
+        justify-content: flex-start;
+        background-color: var(--sidebar-background-color);
+        box-sizing: border-box;
+        padding-top: 4px;
+        -webkit-app-region: drag;
+
+        .docs-nav-inner {
+            display: flex;
+        }
+
+        .docs-nav-item-inner {
+            padding: 3px 12px;
+            height: 100%;
+        }
+
+        .docs-nav-before,
+        .docs-nav-after {
+            width: 20px;
+            height: 100%;
+
+            .docs-nav-item-inner {
+                padding: 4px 0;
+            }
+        }
+        .docs-nav-before.active {
+            background-color: var(--tabbar-active-color);
+            .docs-nav-item-inner {
+                border-bottom-right-radius: 10px;
+                background-color: var(--sidebar-background-color);
+            }
+        }
+
+        .docs-nav-after.active {
+            background-color: var(--tabbar-active-color);
+            .docs-nav-item-inner {
+                border-bottom-left-radius: 10px;
+                background-color: var(--sidebar-background-color);
+            }
+        }
+
+        .docs-nav-item {
+            cursor: pointer;
+        }
+
+        .docs-nav-item.active {
+            border-radius: 5px 5px 0 0;
+            background-color: var(--tabbar-active-color);
+        }
+        .docs-nav-item.after-active {
+            background-color: var(--tabbar-active-color);
+
+            .docs-nav-item-inner {
+                border-bottom-left-radius: 10px;
+                background-color: var(--sidebar-background-color);
+            }
+        }
+
+        .docs-nav-item.before-active {
+            background-color: var(--tabbar-active-color);
+
+            .docs-nav-item-inner {
+                border-bottom-right-radius: 10px;
+                background-color: var(--sidebar-background-color);
+            }
+        }
+
+        .docs-item {
+            width: 30px;
+            font-size: 18px;
+        }
+    }
+
+    .docs-tab {
+        height: calc(100% - 30px);
+        background-color: var(--background-color);
+        position: relative;
+        box-sizing: border-box;
+
+        .docs-bar-filter {
+            padding: 0px 10px;
+            display: flex;
+            align-items: center;
+            line-height: 22px;
+            cursor: pointer;
+            font-size: 12px;
+            .docs-bar-filter-title {
+                margin-right: 5px;
+                text-align: right;
+                flex: 1;
+                
+            }
+        }
+
+        .docs-tab__docs,
+        .docs-tab__config,
+        .docs-tab__search {
+            height: 100%;
+        }
+
+        .docs-tab__no-configs {
+            color: var(--disabled-color);
+            font-size: 12px;
+            padding: 50px 10px;
+            text-align: center;
+        }
+    }
+}
+
+.docs-bar-folder-nodes {
+    width: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+}

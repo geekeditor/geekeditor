@@ -1,0 +1,71 @@
+.docs-bar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .docs-bar-header {
+        height: 31px;
+        display: flex;
+        overflow: hidden;
+        background-color: var(--background-color);
+        justify-content: space-between;
+        padding: 0px 10px;
+
+        .docs-bar-title {
+            height: 100%;
+            width: 110px;
+            padding-left: 10px;
+            white-space: nowrap;
+            color: var(--color);
+            display: flex;
+            align-items: center;
+
+            .icon {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .docs-bar-ops {
+        height: 30px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: var(--background-color);
+        .bar-item {
+            width: 15px;
+            height: 15px;
+            font-size: 15px;
+        }
+
+        .bar-item:not(:first-child) {
+            margin-left: 15px;
+        }
+    }
+
+    .docs-bar-providers {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        position: relative;
+        height: 100%;
+    }
+
+    .docs-empty-repo {
+        padding: 30px 0px;
+    }
+
+    .docs-bar-unloaded {
+        padding: 30px 0px;
+        font-size: 10px;
+        text-align: center;
+        color: #cccccc;
+
+        span {
+            color: #388ae5;
+            font-size: 10px;
+            cursor: pointer;
+        }
+    }
+}

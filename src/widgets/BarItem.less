@@ -1,0 +1,28 @@
+.bar-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    color: var(--color);
+    cursor: pointer;
+
+    &:hover {
+        color: var(--hover-color);
+    }
+
+    &.selected {
+        color: var(--selected-color);
+        background-color: var(--selected-background-color);
+    }
+
+    &.disabled {
+        color: var(--disabled-color);
+        cursor: not-allowed;
+    }
+
+    .bar-item__label {
+        margin-top: 5px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,39 @@
+.app {
+    height: 100%;
+    .app-main {
+        height: calc(100% - 0px);
+        display: flex;
+        .app-wins {
+            height: 100%;
+            flex: 1;
+            z-index: 1;
+            box-shadow: rgba(0, 0, 0, 0.1) -2px 0px 4px;
+        }
+    }
+    .app-status-bar {
+        height: 20px;
+        background-color: var(--background-color);
+        color: var(--color);
+        border-top: 1px solid var(--border-color)
+    }
+}
+.app.app--electron {
+    .app-main {
+        height: calc(100% - 28px);
+    }
+}
+.fullscreen .app.app--electron {
+    .app-main {
+        height: calc(100% - 0px);
+    }
+}
+
+.app-notification {
+    color: var(--color);
+    .ant-notification-notice-message {
+        font-weight: bold;
+    }
+    .app-notication-checkbox {
+        color: var(--color);
+    }
+}

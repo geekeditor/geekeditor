@@ -1,0 +1,29 @@
+.docs-nodes-bar-wrap {
+    flex: 1;
+    height: calc(100% - 53px);
+    position: relative;
+
+    .docs-nodes-bar-presentation {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 6px;
+        box-shadow: var(--sidebar-scrollbar-shadow) 0 4px 4px -4px inset;
+        pointer-events: none;
+        z-index: 1;
+    }
+}
+.docs-nodes-bar {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    position: relative;
+    user-select: none;
+    padding-top: 2px;
+
+    &__loading {
+        text-align: center;
+        padding: 10px;
+    }
+}

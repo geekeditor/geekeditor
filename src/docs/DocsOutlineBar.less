@@ -1,0 +1,70 @@
+.docs-outline-bar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .docs-outline-bar-header {
+        display: flex;
+        height: 44px;
+        align-items: center;
+
+        
+
+        .ant-input-search {
+
+            .ant-input {
+                height: 32px;
+                border-radius: 16px !important;
+                
+            }
+
+            .ant-input-group-addon {
+                display: none; 
+            }
+        }
+
+        
+
+        
+    }
+
+    .docs-outline-bar-body {
+        flex: 1;
+        overflow: auto;
+
+        .docs-outline-item {
+            padding: 5px 10px;
+            box-sizing: border-box;
+            cursor: pointer;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            &--active {
+                color: #388ae5;
+                font-weight: bold;
+            }
+
+            .search-mark {
+                color: #388ae5;
+            }
+
+            &.atx-heading2 {
+                padding-left: 10px;
+            }
+            &.atx-heading3 {
+                padding-left: 20px;
+            }
+            &.atx-heading4 {
+                padding-left: 30px;
+            }
+            &.atx-heading5 {
+                padding-left: 40px;
+            }
+            &.atx-heading6 {
+                padding-left: 50px;
+            }
+        }
+    }
+}

@@ -1,0 +1,348 @@
+.win {
+    height: 100%;
+    display: flex;
+
+    .win-inner {
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        flex: 1;
+    }
+}
+
+.win-tab-bar {
+    display: flex;
+    user-select: none;
+    -webkit-app-region: drag;
+    height: 40px;
+    padding: 0px 5px;
+
+    .win-tab-header-wrap {
+        display: inline-block;
+        cursor: pointer;
+        white-space: nowrap;
+
+        .win-tab-header-inner {
+            display: inline-block;
+        }
+
+        .win-tab-header-wrap-arrow {
+            color: rgba(0, 0, 0, 0.25);
+            font-size: 12px;
+            line-height: 40px;
+            display: inline-block;
+        }
+    }
+
+    .win-tab-header {
+        display: inline-block;
+        font-size: 20px;
+        text-align: center;
+        line-height: 40px;
+        position: relative;
+        padding: 0px 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+        color: var(--win-tab-header-color, #757577);
+        vertical-align: middle;
+        background-color: var(--win-tab-header-bgcolor, #ededed);
+        max-width: 200px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+
+        .text-edit {
+            input {
+                border-color: var(--border-color);
+                border-style: solid;
+            }
+        }
+
+        &.win-tab-header--doc {
+            font-size: 14px;
+        }
+
+        .win-tab-header-extension {
+            color: var(--disabled-color);
+        }
+
+
+
+        .win-tab-header-op {
+            position: absolute;
+
+            &.left {
+                left: 0px;
+            }
+
+            &.right {
+                right: 0px;
+            }
+
+            display: inline-block;
+            cursor: pointer;
+
+            .win-tab-header-op-changed {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border-radius: 5px;
+                background-color: var(--win-tab-header-op-color, #666666);
+            }
+
+            .win-tab-header-op-close {
+                display: none;
+            }
+
+            .win-tab-header-op-edit {
+                display: none;
+            }
+        }
+
+        .win-tab-header-op__changed:hover {
+            .win-tab-header-op-changed {
+                display: none;
+            }
+
+            .win-tab-header-op-close {
+                display: inline-block;
+            }
+
+            .win-tab-header-op-edit {
+                display: inline-block;
+            }
+        }
+
+        &:hover {
+            .win-tab-header-op:not(.win-tab-header-op__changed):not(.win-tab-header-op__editing) {
+                .win-tab-header-op-close {
+                    display: inline-block;
+                }
+
+                .win-tab-header-op-edit {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+
+    .win-tab-header.active {
+        background-color: var(--win-tab-header-active-bgcolor, #fdfdfd);
+        color: var(--win-tab-header-active-color, #484848);
+        border-bottom: none;
+    }
+
+    .win-tab-content-wrap {
+        position: absolute;
+        top: 41px;
+        left: 0px;
+        right: 0px;
+        bottom: 20px;
+        background-color: var(--win-tab-content-bgcolor, #fdfdfd);
+        display: none;
+    }
+
+    .win-tab-content-wrap.active {
+        z-index: 1;
+        display: block;
+    }
+}
+
+.win-tab-bar__docs {
+    overflow-x: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    line-height: 40px;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        display: none;
+    }
+}
+
+.win-tab-bar__ops {
+    flex: 1;
+    
+    display: flex;
+    line-height: 40px;
+    align-items: center;
+
+    &.left {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    &.right {
+        justify-content: flex-end;
+        min-width: 100px;
+        padding-right: 5px;
+    }
+
+    .win-tab-bar__op {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        display: inline-block;
+        cursor: pointer;
+        color: var(--win-bar-op-color, #484848);
+        font-size: 14px;
+        position: relative;
+        line-height: 30px;
+        border-radius: 15px;
+
+        &:hover {
+            color: var(--win-bar-op-hover-color, #333333);
+            background-color: var(--hover-background-color);
+           
+        }
+
+        &.active {
+            background-color: var(--win-bar-op-active-bgcolor, #ffffff);
+        }
+
+        &--disabled {
+            color: var(--disabled-color);
+            opacity: 0.3;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+    }
+
+    .win-tab-bar__op--addAs,  .win-tab-bar__op--removeAll{
+        display: none;
+    }
+
+    .win-tab-bar__op--add {
+        margin-right: 10px;
+    }
+
+    .win-tab-bar__op--add:hover {
+        .win-tab-bar__op--addAs {
+            display: inline-block;
+        }
+    }
+
+    .win-tab-bar__op--remove {
+        .win-tab-bar__op {
+            color: var(--win-tab-header-op-sub-color);
+            font-size: 10px;
+        }
+        
+        &:hover {
+            .win-tab-bar__op--removeAll {
+                display: inline-block;
+            }
+        }
+    }
+
+    .win-tab-bar__op--stack {
+        min-width: 60px;
+    }
+}
+
+.win-tab-bar--empty {}
+
+.opened-nodes {
+    width: 200px;
+
+    .opened-nodes-divider {
+        margin: 5px 0px;
+    }
+}
+
+
+.remove-modal {
+
+    .remove-modal__content {
+
+        .remove-modal__title {
+            font-weight: bold;
+            font-size: 15px;
+
+            .remove-modal__icon {
+                margin-right: 5px;
+            }
+        }
+
+        .remove-modal__info {
+            margin-top: 10px;
+        }
+
+    }
+
+    .remove-modal__footer {
+        display: flex;
+        justify-content: space-between;
+
+        .remove-modal__footer-right {
+            display: flex;
+        }
+    }
+
+}
+
+
+.win-tab-status-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    justify-content: space-between;
+    padding: 0px 5px;
+    -webkit-app-region: drag;
+    background-color: var(--win-tab-header-bgcolor);
+    color: var(--color);
+
+    .win-tab-status-bar-words {
+        margin-left: 50px;
+    }
+
+    .win-tab-status-bar-tools {
+        white-space: nowrap;
+        display: flex;
+        margin: 0px 0px;
+        flex: 1;
+        justify-content: flex-end;
+        align-items: center;
+
+        .bar-item {
+            width: 20px;
+            height: 20px;
+        }
+
+        .win-tab-status-bar-item {
+            color: var(--color);
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+
+            font-size: 12px;
+        }
+
+        .win-tab-status-bar-item + .win-tab-status-bar-item {
+            margin-left: 2px;
+        }
+    }
+}
+
+.create-operation-modal {
+    .ant-modal-close {
+        display: none;
+    }
+    .create-form {
+        display: flex;
+
+        input {
+            flex: 1;
+        }
+        button {
+            margin-left: 10px;
+        }
+    }
+}

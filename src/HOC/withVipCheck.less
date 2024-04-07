@@ -1,0 +1,15 @@
+.wrapped-vip {
+    display: inline-block;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 16px;
+        height: 16px;
+        background-image: url('../assets/VIP.png');
+        background-size: contain;
+    }
+}

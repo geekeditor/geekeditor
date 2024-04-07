@@ -1,0 +1,121 @@
+.editor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: top 0.1s ease-in-out;
+
+    .editor-inner {
+        height: 100%;
+        width: 100%;
+
+        .editor-toolbar {
+            background-color: var(--background-color);
+            border-bottom: 1px solid var(--editor-border-color);
+
+            .editor-toolbar-ops {
+                height: 30px;
+                display: flex;
+                flex: 1;
+                align-items: center;
+                justify-content: center;
+                background-color: #f8f8f8;
+                position: relative;
+
+                button {
+                    color: #333;
+                }
+
+                .editor-toolbar-ops__right {
+                    height: 100%;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+
+                .editor-item {
+                    width: 32px;
+                    height: 32px;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+    .editor-main {
+        display: flex;
+        height: 100%;
+        position: relative;
+    }
+
+    .editor-core {
+        flex: 1;
+        line-height: 0px;
+
+
+        .editor-canvas {
+            height: calc(100% - 0px);
+            width: 100%;
+        }
+
+        .editable {
+            height: 100%;
+            width: 100%;
+        }
+
+        .editor-status-bar {
+            height: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 10px;
+            justify-content: center;
+            padding: 0px 10px;
+            -webkit-app-region: drag;
+            background-color: var(--win-tab-header-bgcolor);
+            color: var(--color);
+        }
+    }
+
+    .editor-side-bar {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: flex-end;
+        .editor-side-bar-nav {
+            width: 31px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1;
+            height: 100%;
+
+            .editor-side-bar-item {
+                height: 30px;
+                margin: 5px 0px;
+                font-size: 14px;
+            }
+            .geui-state-item {
+                margin: 5px 0px;
+            }
+        }
+
+        .ant-badge {
+            display: block;
+
+            .ant-scroll-number {
+                transform: none;
+                font-size: 10px;
+                height: 12px;
+                min-width: 12px;
+                line-height: 12px;
+                top: -1px;
+                right: 1px;
+            }
+
+            .ant-badge-multiple-words {
+                padding: 0 4px;
+            }
+        }
+    }
+}

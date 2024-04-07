@@ -1,0 +1,41 @@
+.ge-menu-item {
+    display: flex;
+    color: var(--color);
+    padding: 5px 10px;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+
+    &__icon {
+        display: inline-block;
+        margin-right: 5px;
+        line-height: 0;
+    }
+    &__name {
+        display: inline-block;
+        flex: 1;
+    }
+
+    &--incoming {
+        color: var(--disabled-color);
+        opacity: 0.3;
+        &::after {
+            content: 'Coming soon';
+            position: absolute;
+            display: inline-block;
+            right: 0px;
+            top: 0px;
+            font-size: 12px;
+            color: var(--disabled-color);
+        }
+    }
+    &--disabled {
+        color: var(--disabled-color);
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+}
+.ge-menu-item:not(.ge-menu-item--incoming):not(.ge-menu-item--disabled):hover {
+    color: var(--hover-color);
+    background-color: var(--hover-background-color);
+}

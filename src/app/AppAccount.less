@@ -1,0 +1,82 @@
+.account-modal {
+
+    .account-block {
+        display: none;
+    }
+
+    .account-block--actived {
+        display: block;
+    }
+
+    .account-nav {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        align-items:baseline;
+        margin: 10px 0px 20px;
+    }
+
+    .account-nav-title {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .account-nav-btn {
+        color: var(--theme-color);
+        cursor: pointer;
+    }
+
+    .account-code {
+        .ant-form-item-control-input-content {
+            display: flex;
+
+            button {
+                margin-left: 5px;
+            }
+        }
+
+        .ant-form-item {
+            margin-bottom: 0px;
+        }
+    }
+
+    
+}
+
+.vip {
+    display: inline-block;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: -25px;
+        top: -5px;
+        width: 30px;
+        height: 30px;
+        background-image: url('../assets/VIPHat.png');
+        background-size: contain;
+    }
+}
+
+.account-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--theme-color);
+    color: var(--theme-text-color);
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+
+    &.vip {
+        &::after {
+            content: "";
+            position: absolute;
+            right: -5px;
+            top: -10px;
+            width: 18px;
+            height: 18px;
+        }
+    }
+}
