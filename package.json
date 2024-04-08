@@ -144,6 +144,7 @@
   ],
   "homepage": "./",
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/register": "^7.13.14",
     "@codexteam/shortcuts": "^1.1.1",
     "@types/blueimp-md5": "^2.18.0",
@@ -160,15 +161,13 @@
     "@types/showdown": "^1.9.3",
     "@types/webpack-env": "^1.16.0",
     "css-to-string-loader": "^0.1.3",
-    "javascript-obfuscator": "^2.14.0",
     "less": "^4.1.0",
     "less-loader": "^7.3.0",
     "monaco-editor-webpack-plugin": "^7.1.0",
     "obfuscator-loader": "^1.1.2",
     "postcss-loader": "^3.0.0",
     "prerender-spa-plugin": "^3.4.0",
-    "raw-loader": "^4.0.2",
-    "webpack-obfuscator": "^2.6.0"
+    "raw-loader": "^4.0.2"
   },
   "jest": {
     "roots": [

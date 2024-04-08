@@ -39,3 +39,18 @@ It supports the export of Image, PDF, HTML, Textbundle, Markdown, TXT and other 
 #### 1.6 Backup encryption configuration
 
 Support password encryption configuration backup to local or cloud, facilitating cross device writing.
+
+## 2. Development
+
+```sh
+# step1: install dependencies
+npm install --legacy-peer-deps
+# step2: run the development codes
+npm start
+```
+
+## 3. Build
+
+```sh
+npm run build:release
+```

@@ -26,7 +26,6 @@ const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin");
 const typescriptFormatter = require("react-dev-utils/typescriptFormatter");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
-const WebpackObfuscator = require('webpack-obfuscator');
 const PrerenderSpaPlugin = require('prerender-spa-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
