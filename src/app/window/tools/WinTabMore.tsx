@@ -37,7 +37,7 @@ const WinTabMore: React.FC<{ onRemoveAll: () => void,
 
     
     return <>
-        <Popover placement="bottom" open={moreBarVisible} onOpenChange={onMoreBarVisible} content={moreList} trigger="click" destroyTooltipOnHide={{ keepParent: false }}>
+        <Popover placement="bottomLeft" open={moreBarVisible} onOpenChange={onMoreBarVisible} content={moreList} trigger="click" destroyTooltipOnHide={{ keepParent: false }}>
             <span className={["win-tab-bar__op win-tab-bar__op--more", moreBarVisible ? " active" : ""].join("")} ><MoreOutlined /></span>
         </Popover>
     </>

@@ -220,7 +220,7 @@ class Win extends Component<{
         const {tabs, onWinTabAdd, onWinTabRemove, onWinTabRemoveAll, onWinTabRemoveOthers, onWinTabExchange, activeTabID, showAppSideBar, onShowAppSideBar} = this.props;
         const {sideBarOpened, sideBarWidth, lastSideBarWidth, typoMode, isInit} = this.state;
         const defaultWin = this.props.defaultWin;
-        const Sketch = <SketchBar placementLeft={true} width={lastSideBarWidth} onStart={this.onSketchStart} onEnd={this.onSketchEnd} onChange={this.onSketchChange} />;
+        // const Sketch = <SketchBar placementLeft={true} width={lastSideBarWidth} onStart={this.onSketchStart} onEnd={this.onSketchEnd} onChange={this.onSketchChange} />;
         
         return (
                 <div className="win">
@@ -229,7 +229,7 @@ class Win extends Component<{
                         {isInit && <WinTabBar ref={(tabBar)=>{this.tabBar=tabBar}} typoMode={typoMode} onTriggerTypoMode={this.onTriggerTypoMode} showAppSideBar={showAppSideBar} onShowAppSideBar={onShowAppSideBar} defaultActiveID={activeTabID} defaultWin={defaultWin} tabs={tabs} sideBarOpened={sideBarOpened} onWinTabExchange={onWinTabExchange} onWinTabAdd={onWinTabAdd} onWinTabRemove={onWinTabRemove} onWinTabRemoveAll={onWinTabRemoveAll} onWinTabRemoveOthers={onWinTabRemoveOthers} onWinTabActive={this.onWinTabActive} onTriggerSideBar={this.onTriggerSideBar}/>}
                         
                     </div>
-                    <WinSideBar sketchBar={Sketch} typoMode={typoMode} sideBarWidth={sideBarWidth} tabs={tabs} activeTabID={activeTabID} sideBarOpened={sideBarOpened} onSelect={this.onSelect} onRemove={this.onRemove} onExchange={onWinTabExchange}/>
+                    {/* <WinSideBar sketchBar={Sketch} typoMode={typoMode} sideBarWidth={sideBarWidth} tabs={tabs} activeTabID={activeTabID} sideBarOpened={sideBarOpened} onSelect={this.onSelect} onRemove={this.onRemove} onExchange={onWinTabExchange}/> */}
                 </div>
         )
     }
