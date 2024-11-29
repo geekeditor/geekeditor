@@ -423,6 +423,10 @@ export default class WinTabBar extends Component<{
         }
     }
 
+    onRemoveCurrent = () => {
+        this.onRemove(this.state.activeTabID)
+    }
+
     render() {
         const { tabs, typoMode, onTriggerTypoMode, sideBarOpened, onTriggerSideBar, onWinTabRemoveAll, onWinTabRemoveOthers, onWinTabExchange, showAppSideBar } = this.props;
         const { activeTabID, canBack, canNext } = this.state;
@@ -450,7 +454,7 @@ export default class WinTabBar extends Component<{
                             {activeTab && <WinTabSearch node={activeTab.node as IDocsNode} />}
                             {/* <span id="app-guide-more" className={["win-tab-bar__op", typoMode ? 'active' : ''].join(' ')} onMouseDown={onTriggerTypoMode}><FormatPainterOutlined /></span>  */}
                             {activeTab && <WinTabExport node={activeTab.node as IDocsNode} />}
-                            {activeTab && <WinTabMore onRemoveAll={onWinTabRemoveAll} onRemoveOthers={onWinTabRemoveOthers} />}
+                            {activeTab && <WinTabMore onRemoveCurrent={this.onRemoveCurrent} onRemoveAll={onWinTabRemoveAll} onRemoveOthers={onWinTabRemoveOthers} />}
                             {/* {<span id="app-guide-more" className={["win-tab-bar__op", sideBarOpened ? 'active' : ''].join(' ')} onMouseDown={onTriggerSideBar}><EllipsisOutlined /></span>} */}
                         </div>
                     </div>

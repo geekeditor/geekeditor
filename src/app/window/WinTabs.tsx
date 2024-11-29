@@ -97,7 +97,7 @@ export default class WinTabBar extends Component<{
                         </Popover>
                     }
                     {
-                        tabs.length && <WinTabRemove onRemoveCurrent={()=>onRemove(activeTab.id)} onRemoveAll={onRemoveAll} onRemoveOthers={onRemoveOthers}/>
+                        // tabs.length && <WinTabRemove onRemoveCurrent={()=>onRemove(activeTab.id)} onRemoveAll={onRemoveAll} onRemoveOthers={onRemoveOthers}/>
                     }
 
 

@@ -46,8 +46,9 @@
         "initLoading": "初次加载，请稍等...",
         "notSupportEditing": "不支持编辑查看",
         "removedTip": "文档已被删除",
-        "closeAllDocs": "关闭所有文档",
-        "closeOtherDocs": "关闭其它文档",
+        "close": "关闭",
+        "closeAllDocs": "关闭所有",
+        "closeOtherDocs": "关闭其它",
         "newOrOpen": "新建 / 打开"
     },
     "settings": {

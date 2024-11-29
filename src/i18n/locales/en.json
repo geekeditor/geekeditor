@@ -46,8 +46,9 @@
         "initLoading": "First time loading, please wait...",
         "notSupportEditing": "Not support editing and viewing",
         "removedTip": "The document is removed",
-        "closeAllDocs": "Close all documents",
-        "closeOtherDocs": "Close other documents",
+        "close": "Close",
+        "closeAllDocs": "Close all",
+        "closeOtherDocs": "Close others",
         "newOrOpen": "New / Open"
     },
     "settings": {
