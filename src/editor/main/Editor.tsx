@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Editor.less'
+import './assets/style.less'
 import MEditable from '@geekeditor/meditable';
 import '@geekeditor/meditable/dist/assets/meditable.css'
 import { IDocsNodeBase } from '../../types/docs';
