@@ -181,6 +181,10 @@ export default class DocsProviderMemory extends CustomEventEmitter implements ID
         return false;
     }
 
+    get hasChildren() {
+        return !!this._children.length;
+    }
+
     setStatus(status: EDocsNodeBaseStatus) {
         this._status = status;
     }

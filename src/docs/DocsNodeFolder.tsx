@@ -1,13 +1,11 @@
-import React, { Component, DragEvent } from "react"
-import { EDocsNodeType, IDocsNodeBase, EDocsNodeChangeType, EDocsProviderType } from "../types/docs.d"
-import { LoadingOutlined, FolderOpenOutlined, FolderOutlined, FolderAddOutlined, ReloadOutlined, DownOutlined, RightOutlined } from '@ant-design/icons'
+import React, { Component } from "react"
+import { EDocsNodeType, IDocsNodeBase, EDocsNodeChangeType } from "../types/docs.d"
+import { LoadingOutlined, FolderOutlined, FolderAddOutlined, ReloadOutlined, DownOutlined, RightOutlined } from '@ant-design/icons'
 import BarItem from '../widgets/BarItem'
-import { Dropdown, Empty, Menu, Popconfirm, Button } from 'antd';
-import TransitionModal from '../widgets/TransitionModal'
 import './DocsNode.less'
 import DocsNodeEdit from '../widgets/TextEdit'
-import { bindEvent, unbindEvent } from '../utils/utils'
 import { message } from 'antd'
+import i18n from "../i18n";
 
 export default class DocsNodeFolder extends Component<{
     node: IDocsNodeBase;
@@ -23,8 +21,6 @@ export default class DocsNodeFolder extends Component<{
 }> {
 
     private addNodeType!: EDocsNodeType
-    private transitionModal!: TransitionModal | null;
-    private readonly MIME_TYPE = 'application/geekeditor-doc';
     static dropNodeMap: { [key: string]: IDocsNodeBase } = {}
     constructor(props: any) {
         super(props);
@@ -85,7 +81,7 @@ export default class DocsNodeFolder extends Component<{
             const children = node.children;
             const index = children.findIndex((n) => n.title === text && n.nodeType === nodeType);
             if (index !== -1) {
-                message.warn(`不能创建重名${nodeType === EDocsNodeType.EDocsNodeTypeDoc ? '文档' : '文件夹'}`)
+                message.warn(i18n.t("repo.duplicateName"))
                 return;
             }
 
@@ -103,11 +99,11 @@ export default class DocsNodeFolder extends Component<{
                             const { onActiveNode } = this.props;
                             onActiveNode(node);
                         } else {
-                            message.error('创建保存失败');
+                            message.error(i18n.t("repo.createFail"));
                         }
                     })
                 } else {
-                    message.error('创建保存失败');
+                    message.error(i18n.t("repo.createFail"));
                 }
                 this.setState({
                     addNodeEditing: false
@@ -172,22 +168,22 @@ export default class DocsNodeFolder extends Component<{
         const children = node.children.filter((node) => node.nodeType === EDocsNodeType.EDocsNodeTypeDir);
         const supportFolder = node.supportCreateNode(EDocsNodeType.EDocsNodeTypeDir);
         const supportReload = node.supportReloadNode;
-        const isFolder = node.nodeType === EDocsNodeType.EDocsNodeTypeDir;
         const isActive = node === activeNode;
+        const hasChildren = children.length > 0;
         const Nodes = children.map((node) => {
             return <DocsNodeFolder hideOps={hideOps} key={node.tempID} node={node} activeNode={activeNode} onActiveNode={onActiveNode} />
         })
 
         return (
             <>
-                <div data-node-id={nodeId} className={["docs-node", isFolder ? " docs-node--folder" : "", isActive ? " active" : ""].join("")} >
+                <div data-node-id={nodeId} className={["docs-node", " docs-node--folder", isActive ? " active" : ""].join("")} >
                     {!noHeader && <div>
                             {!titleEditing &&
                                 <div className="docs-node__nav" onClick={this.onActive}>
-                                    {!loading && isFolder && <span onClick={(e)=>{e.stopPropagation();this.onExpand()}} className="docs-node__expand">{expand ? <DownOutlined /> : <RightOutlined />}</span>}
+                                    {!loading && hasChildren && <span onClick={(e)=>{e.stopPropagation();this.onExpand()}} className="docs-node__expand">{expand ? <DownOutlined /> : <RightOutlined />}</span>}
                                     <div className="docs-node__info">
                                         {loading && <LoadingOutlined />}
-                                        {isFolder && <FolderOutlined />}
+                                        {<FolderOutlined />}
                                         <span className="docs-node__name">{title}</span>
                                     </div>
                                     {!hideOps && !loading && <div className="docs-node__ops">
@@ -199,8 +195,7 @@ export default class DocsNodeFolder extends Component<{
                         </div>
                     }
                     {titleEditing && <div className="docs-node__title-editing"><DocsNodeEdit text={title} onFinishing={this.onTitleEditing} /></div>}
-                    {isFolder &&
-                        <div className={["docs-node__content", (addNodeEditing || Nodes.length) && !noHeader ? ' padding' : ''].join('')} style={{ display: expand ? `block` : `none` }}>
+                    {<div className={["docs-node__content", (addNodeEditing || Nodes.length) && !noHeader ? ' padding' : ''].join('')} style={{ display: expand ? `block` : `none` }}>
                             {addNodeEditing && <div className="docs-node__adding"><DocsNodeEdit text="" onFinishing={this.onAddNoteEditing} /></div>}
                             {Nodes}
                         </div>}
