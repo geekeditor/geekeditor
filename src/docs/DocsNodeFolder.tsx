@@ -59,7 +59,7 @@ export default class DocsNodeFolder extends Component<{
         if (!this.state.expand && e.button === 0) {
             this.onExpand()
         }
-        // e.stopPropagation();
+        e.stopPropagation();
     }
 
 
@@ -184,9 +184,9 @@ export default class DocsNodeFolder extends Component<{
                     {!noHeader && <div>
                             {!titleEditing &&
                                 <div className="docs-node__nav" onClick={this.onActive}>
+                                    {!loading && isFolder && <span onClick={(e)=>{e.stopPropagation();this.onExpand()}} className="docs-node__expand">{expand ? <DownOutlined /> : <RightOutlined />}</span>}
                                     <div className="docs-node__info">
                                         {loading && <LoadingOutlined />}
-                                        {!loading && isFolder  && <BarItem wrapClassName="docs-node__expand" icon={(expand ?  <DownOutlined /> : <RightOutlined />)} onClick={()=>this.onExpand()}/> }
                                         {isFolder && <FolderOutlined />}
                                         <span className="docs-node__name">{title}</span>
                                     </div>
