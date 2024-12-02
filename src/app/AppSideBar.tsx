@@ -6,12 +6,13 @@ import AppSideBarDocs from "./AppSideBarDocs";
 import "./AppSideBar.less"
 import { IDocsNodeBase } from "../types/docs"
 import sharedEventBus from '../utils/sharedEventBus'
-import AppTheme from "./AppTheme";
+// import AppTheme from "./AppTheme";
 import AppSettings from "./AppSettings";
 import AppRepo from "./AppRepo";
-import { isElectron } from "../utils/utils";
-import AppZen from "./AppZen";
+// import { isElectron } from "../utils/utils";
+// import AppZen from "./AppZen";
 import AppAccount from "./AppAccount";
+import AppInstall from "./AppInstall";
 
 enum EHomeBarTabSelect {
     EHomeBarTabSelectNone,
@@ -107,7 +108,7 @@ export default class AppSideBar extends Component<{
                             {/* {isElectron ? <BarItem id="app-guide-zenmode" icon={zenModeIcon}  wrapClassName="app-bar-item" onClick={this.onZenModeToggle}/> : <BarItem id="app-guide-desktop" icon={<DesktopOutlined />} wrapClassName="app-bar-item" tip="安装浏览器扩展" placement="right" onClick={this.onDownload}/>}
                             
                             <BarItem id="app-guide-darkmode" icon={darkMode ? dayModeIcon : darkModeIcon} wrapClassName="app-bar-item" onClick={this.onDarkModeToggle}/> */}
-                            
+                            <AppInstall />
                             <AppRepo />
                             {/* {isElectron && <AppZen />} */}
 

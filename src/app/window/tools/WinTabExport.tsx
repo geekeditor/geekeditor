@@ -78,7 +78,7 @@ class WinTabExport extends Component<{
             </div>
         );
         return (
-            <Popover placement="bottomRight" title={null} open={menuBarVisible} onOpenChange={this.onMenuBarVisible} content={content} trigger="hover">
+            <Popover placement="bottomRight" title={null} open={menuBarVisible} onOpenChange={this.onMenuBarVisible} content={content} trigger="click">
                 <span className={["win-tab-bar__op", isDisabled ? " win-tab-bar__op--disabled" : "", menuBarVisible ? " active" : ""].join("")}><ExportOutlined /></span>
             </Popover>
         )

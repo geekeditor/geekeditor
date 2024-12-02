@@ -16,5 +16,5 @@ export default function AppRepo() {
         }
     }
 
-    return <><BarItem id="app-guide-new" icon={<SisternodeOutlined />} onClick={onAddDocRepo}  tip={t("settings.addRepository")} placement="right" wrapClassName="app-bar-item" /><DocsProviderAdd ref={provider}/></>
+    return <><BarItem id="app-guide-new" icon={<SisternodeOutlined />} onClick={onAddDocRepo}  tip={t("settings.addRepository")} placement="bottom" wrapClassName="app-bar-item" /><DocsProviderAdd ref={provider}/></>
 }

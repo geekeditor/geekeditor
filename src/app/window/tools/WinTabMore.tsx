@@ -8,10 +8,14 @@ import MenuItem from '../../../widgets/MenuItem';
 import i18n from '../../../i18n';
 
 
-const WinTabMore: React.FC<{ onRemoveAll: () => void,
+const WinTabMore: React.FC<{ onRemoveCurrent: () => void, onRemoveAll: () => void,
     onRemoveOthers: () => void, }> = function (props) {
     const { t } = useTranslation();
     const [moreBarVisible, onMoreBarVisible] = useState(false)
+
+    const onRemoveCurrent = () => {
+        props.onRemoveCurrent();
+    }
 
     const onRemoveAll = ()=>{
         props.onRemoveAll();
@@ -30,14 +34,14 @@ const WinTabMore: React.FC<{ onRemoveAll: () => void,
 
     const moreList =
         (<div className="more-nodes">
-            {/* <MenuItem name={i18n.t("editor.newOrOpen")} icon={null} onClick={onAdd} /> */}
+            <MenuItem name={i18n.t("editor.close")} icon={null} onClick={onRemoveCurrent} />
             <MenuItem name={i18n.t("editor.closeAllDocs")} icon={null} onClick={onRemoveAll} />
             <MenuItem name={i18n.t("editor.closeOtherDocs")} icon={null} onClick={onRemoveOthers} />
         </div>);
 
     
     return <>
-        <Popover placement="bottom" open={moreBarVisible} onOpenChange={onMoreBarVisible} content={moreList} trigger="click" destroyTooltipOnHide={{ keepParent: false }}>
+        <Popover placement="bottomLeft" open={moreBarVisible} onOpenChange={onMoreBarVisible} content={moreList} trigger="click" destroyTooltipOnHide={{ keepParent: false }}>
             <span className={["win-tab-bar__op win-tab-bar__op--more", moreBarVisible ? " active" : ""].join("")} ><MoreOutlined /></span>
         </Popover>
     </>

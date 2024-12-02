@@ -46,8 +46,9 @@
         "initLoading": "First time loading, please wait...",
         "notSupportEditing": "Not support editing and viewing",
         "removedTip": "The document is removed",
-        "closeAllDocs": "Close all documents",
-        "closeOtherDocs": "Close other documents",
+        "close": "Close",
+        "closeAllDocs": "Close all",
+        "closeOtherDocs": "Close others",
         "newOrOpen": "New / Open"
     },
     "settings": {
@@ -185,8 +186,8 @@
         "geekEditor": "GeekEditor",
         "sologan": "Markdown Immersive Writing and Typography",
         "toolTips": "Open source and free, based on GitHub/Gitee/GitLab repository storage",
-        "extensionInstall": "Chrome Store Installation Extension",
-        "extensionInstallTips": "Installation extension supports simultaneous login to multiple official accounts and synchronization of articles",
+        "appInstall": "Install Progressive Web App",
+        "appInstallTips": "Install PWA and use it like using desktop software",
         "startWriting": "Start writing",
         "f1": "Private storage",
         "f1Tips": "Configure GitHub/Getee/GetLab repositories, or local repositories for documents storage.",

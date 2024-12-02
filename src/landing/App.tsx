@@ -6,132 +6,164 @@ import "./App.less"
 
 import logo from './assets/icon_128x128.png'
 import chromeIcon from './assets/chrome_128.png'
-import checkIcon from './assets/check-circle.svg'
+import installIcon from './assets/install.svg'
 import startIcon from './assets/star.svg'
 import { WithTranslation, withTranslation } from 'react-i18next';
 import { GithubOutlined } from '@ant-design/icons';
 
-class App extends React.Component<WithTranslation> {
+class App extends React.Component<WithTranslation, { showInstall: boolean }> {
+
+    deferredPrompt: any;
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            showInstall: false
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this.deferredPrompt = e;
+            this.setState({ showInstall: true });
+        });
+    }
+
+    installPWA = () => {
+        if (this.deferredPrompt) {
+            this.deferredPrompt.prompt();
+            this.deferredPrompt.userChoice.then((choiceResult: any) => {
+                if (choiceResult.outcome === 'accepted') {
+                    this.setState({ showInstall: false });
+                }
+            });
+        }
+
+    }
+
+
 
     componentDidMount() {
     }
 
     render() {
-        const {t} = this.props
+        const { t } = this.props
+        const { showInstall } = this.state
         return <>
             <section className="background">
-        <nav className="container">
-            <div className="navigation">
-                <a href="/" className="navigation__item logo" style={{flexFlow: '1'}}>
-                    <img src={logo} alt="GeekEditor" />
-                    <span className="brand" style={{fontSize: '20px'}}>{t("landing.geekEditor")}</span>
-                </a>
-                <a href="https://github.com/geekeditor" target='blank' className="navigation__item logo" style={{flexFlow: '1'}}>
-                    <GithubOutlined style={{fontSize: "30px"}}/>
-                </a>
-            </div>
-        </nav>
-    
-        <main className="container main">
-    
-            <div className="main__item">
-                <h1>{t("landing.sologan")}</h1>
-                <h3>{t("landing.toolTips")}</h3>
-    
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                    <a href="https://chrome.google.com/webstore/detail/%E6%9E%81%E5%AE%A2%E7%BC%96%E8%BE%91%E5%99%A8/eljjnobigoedmlabbjdbkmdedadpeiba"
-                        target="_blank" className="button button--empty">
-                        <img src={chromeIcon} alt="Chrome" style={{height: '18px'}} />
-                        <span style={{padding: '0 5px 0 10px'}}>{t("landing.extensionInstall")}</span>
-                    </a>
-                    {/* <a href="https://cdn.montisan.cn/geekeditor-extension.zip"
+                <nav className="container">
+                    <div className="navigation">
+                        <a href="/" className="navigation__item logo" style={{ flexFlow: '1' }}>
+                            <img src={logo} alt="GeekEditor" />
+                            <span className="brand" style={{ fontSize: '20px' }}>{t("landing.geekEditor")}</span>
+                        </a>
+                        <a href="https://github.com/geekeditor" target='blank' className="navigation__item logo" style={{ flexFlow: '1' }}>
+                            <GithubOutlined style={{ fontSize: "30px" }} />
+                        </a>
+                    </div>
+                </nav>
+
+                <main className="container main">
+
+                    <div className="main__item">
+                        <h1>{t("landing.sologan")}</h1>
+                        <h3>{t("landing.toolTips")}</h3>
+
+                        {showInstall && <>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <div className="button button--empty" onClick={ this.installPWA }>
+                                    <img src={installIcon} alt="Chrome" style={{ height: '18px' }} />
+
+                                    <span style={{ padding: '0 5px 0 10px' }}>{t("landing.appInstall")}</span>
+                                </div>
+                                {/* <a href="https://cdn.montisan.cn/geekeditor-extension.zip"
                         target="_blank" className="button button--empty" style={{marginLeft: '10px'}}>
                         <span style={{padding: '0 5px 0 5px;'}}>官网下载安装扩展</span>
                     </a> */}
-                </div>
-                <div style={{marginTop: '12px', fontWeight: 300, fontSize: '14px'}}>
-                    <div style={{display: 'flex', alignItems: 'flex-end'}}>
-                        <img src={startIcon} style={{marginRight: '6px'}} />{t("landing.extensionInstallTips")}
+                            </div>
+                            <div style={{ marginTop: '12px', fontWeight: 300, fontSize: '14px' }}>
+                                <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                                    <img src={startIcon} style={{ marginRight: '6px' }} />{t("landing.appInstallTips")}
+                                </div>
+                            </div>
+                        </>}
+
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: showInstall ? '50px' : '0px' }}>
+                            <a href="./workspace.html" className="button button--filled">
+                                <span style={{ padding: '0 5px 0 5px' }}>{t("landing.startWriting")}</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div style={{display: 'flex', alignItems: 'center', marginTop: '50px'}}>
-                    <a href="./workspace.html" className="button button--filled">
-                        <span style={{padding: '0 5px 0 5px'}}>{t("landing.startWriting")}</span>
-                    </a>
-                </div>
-            </div>
-        </main>
-    
-    
-        <section
-            className='profile'>
-            <div className="container">
-                <div className="row">
-                <div className="col-1"></div>
-                    <div className="col-10 editor">
-                        <iframe
-                            src="./workspace.html"></iframe>
+                </main>
+
+
+                <section
+                    className='profile'>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-1"></div>
+                            <div className="col-10 editor">
+                                <iframe
+                                    src="./workspace.html"></iframe>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-    </section>
+                </section>
+            </section>
 
-    
 
-    <section
-    className='functions'>
-        
-        <div className="container">
-            <div className="row facts">
-                <div className="col-4">
-                    <div className="facts__separator"></div>
-                    <strong>{t("landing.f1")}</strong>
-                    <p>
-                    {t("landing.f1Tips")}
-                    </p>
-                </div>
-                <div className="col-4">
-                    <div className="facts__separator"></div>
-                    <strong>Markdown</strong>
-                    <p>
-                    {t("landing.f2Tips")}
-                    </p>
-                </div>
 
-                <div className="col-4">
-                    <div className="facts__separator"></div>
-                    <strong>{t("landing.f3")}</strong>
-                    <p>
-                    {t("landing.f3Tips")}
-                    </p>
-                </div>
-                <div className="col-4">
-                    <div className="facts__separator"></div>
-                    <strong>{t("landing.f4")}</strong>
-                    <p>
-                    {t("landing.f4Tips")}
-                    </p>
-                </div>
-                <div className="col-4">
-                    <div className="facts__separator"></div>
-                    <strong>{t("landing.f5")}</strong>
-                    <p>
-                    {t("landing.f5Tips")}
-                    </p>
-                </div>
-                <div className="col-4">
+            <section
+                className='functions'>
+
+                <div className="container">
+                    <div className="row facts">
+                        <div className="col-4">
+                            <div className="facts__separator"></div>
+                            <strong>{t("landing.f1")}</strong>
+                            <p>
+                                {t("landing.f1Tips")}
+                            </p>
+                        </div>
+                        <div className="col-4">
+                            <div className="facts__separator"></div>
+                            <strong>Markdown</strong>
+                            <p>
+                                {t("landing.f2Tips")}
+                            </p>
+                        </div>
+
+                        <div className="col-4">
+                            <div className="facts__separator"></div>
+                            <strong>{t("landing.f3")}</strong>
+                            <p>
+                                {t("landing.f3Tips")}
+                            </p>
+                        </div>
+                        <div className="col-4">
+                            <div className="facts__separator"></div>
+                            <strong>{t("landing.f4")}</strong>
+                            <p>
+                                {t("landing.f4Tips")}
+                            </p>
+                        </div>
+                        <div className="col-4">
+                            <div className="facts__separator"></div>
+                            <strong>{t("landing.f5")}</strong>
+                            <p>
+                                {t("landing.f5Tips")}
+                            </p>
+                        </div>
+                        {/* <div className="col-4">
                     <div className="facts__separator"></div>
                     <strong>{t("landing.f6")}</strong>
                     <p>
                     {t("landing.f6Tips")}
                     </p>
+                </div> */}
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    {/* <section className='features'>
+            {/* <section className='features'>
         <div className="container">
             <div className="row">
                 <div className="col-1"></div>
@@ -290,7 +322,7 @@ class App extends React.Component<WithTranslation> {
         </div>
     </section> */}
 
-    {/* <section className='questions'>
+            {/* <section className='questions'>
         <div className="container">
             <h2>
                 常见问题
@@ -332,24 +364,24 @@ class App extends React.Component<WithTranslation> {
         </div>
     </section> */}
 
-    <section style={{width: '100%', top: '-200px',display: 'flex', justifyContent: 'center', position: 'relative'}}>
-    <div style={{display: 'flex', alignItems: 'center', marginTop: '200px'}}>
+            <section style={{ width: '100%', top: '-200px', display: 'flex', justifyContent: 'center', position: 'relative' }}>
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '200px' }}>
                     <a href="./workspace.html" className="button button--filled">
-                        <span style={{padding: '0 5px 0 5px'}}>{t("landing.startWriting")}</span>
+                        <span style={{ padding: '0 5px 0 5px' }}>{t("landing.startWriting")}</span>
                     </a>
                 </div>
-    </section>
-	
+            </section>
 
-    <footer className="footer">
-        <div className="container">
-            <div>Copyright © 2021-2023 {t("landing.geekEditor")} <a href="http://beian.miit.gov.cn/" target="_blank">{t("landing.recordNumber")}</a></div>
-            {/* <div style={{color: '#afafaf'}}>
+
+            <footer className="footer">
+                <div className="container">
+                    <div>Copyright © 2021-2023 {t("landing.geekEditor")} <a href="http://beian.miit.gov.cn/" target="_blank">{t("landing.recordNumber")}</a></div>
+                    {/* <div style={{color: '#afafaf'}}>
                 {t("landing.friendshipLink")}
                 <a href="http://h5.dooring.cn/" target="_blank">{t("landing.h5Dooring")}</a>
             </div> */}
-        </div>
-    </footer>
+                </div>
+            </footer>
         </>
     }
 }

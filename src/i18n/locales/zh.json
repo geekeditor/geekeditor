@@ -46,8 +46,9 @@
         "initLoading": "初次加载，请稍等...",
         "notSupportEditing": "不支持编辑查看",
         "removedTip": "文档已被删除",
-        "closeAllDocs": "关闭所有文档",
-        "closeOtherDocs": "关闭其它文档",
+        "close": "关闭",
+        "closeAllDocs": "关闭所有",
+        "closeOtherDocs": "关闭其它",
         "newOrOpen": "新建 / 打开"
     },
     "settings": {
@@ -185,8 +186,8 @@
         "geekEditor": "极客编辑器",
         "sologan": "Markdown 沉浸式写作排版",
         "toolTips": "开源免费，基于 GitHub/Gitee/GitLab 仓库存储",
-        "extensionInstall": "Chrome商店安装扩展",
-        "extensionInstallTips": "安装扩展支持同时登录多个公众号、同步文章",
+        "appInstall": "安装渐进式Web应用",
+        "appInstallTips": "安装PWA，像使用桌面软件一样",
         "startWriting": "开始写作",
         "f1": "私有存储",
         "f1Tips": "配置GitHub/Gitee/GitLab仓库，也可以配置本地仓库，文档自主管理。",
