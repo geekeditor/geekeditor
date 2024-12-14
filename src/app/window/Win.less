@@ -164,7 +164,7 @@
 
 .win-tab-bar__ops {
     flex: 1;
-    
+
     display: flex;
     line-height: 40px;
     align-items: center;
@@ -178,6 +178,10 @@
         justify-content: flex-end;
         min-width: 100px;
         padding-right: 5px;
+    }
+
+    .win-tab-bar__op+.win-tab-bar__op {
+        margin-left: 4px;
     }
 
     .win-tab-bar__op {
@@ -195,7 +199,7 @@
         &:hover {
             color: var(--win-bar-op-hover-color, #333333);
             background-color: var(--hover-background-color);
-           
+
         }
 
         &.active {
@@ -210,12 +214,13 @@
         }
     }
 
-    .win-tab-bar__op--addAs,  .win-tab-bar__op--removeAll{
+    .win-tab-bar__op--addAs,
+    .win-tab-bar__op--removeAll {
         display: none;
     }
 
-    .win-tab-bar__op--add {
-        margin-right: 10px;
+    .win-tab-bar__op--more {
+        margin-right: 4px;
     }
 
     .win-tab-bar__op--add:hover {
@@ -229,7 +234,7 @@
             color: var(--win-tab-header-op-sub-color);
             font-size: 10px;
         }
-        
+
         &:hover {
             .win-tab-bar__op--removeAll {
                 display: inline-block;
@@ -244,13 +249,7 @@
 
 .win-tab-bar--empty {}
 
-.opened-nodes {
-    width: 200px;
 
-    .opened-nodes-divider {
-        margin: 5px 0px;
-    }
-}
 
 
 .remove-modal {
@@ -325,7 +324,7 @@
             font-size: 12px;
         }
 
-        .win-tab-status-bar-item + .win-tab-status-bar-item {
+        .win-tab-status-bar-item+.win-tab-status-bar-item {
             margin-left: 2px;
         }
     }
@@ -335,12 +334,14 @@
     .ant-modal-close {
         display: none;
     }
+
     .create-form {
         display: flex;
 
         input {
             flex: 1;
         }
+
         button {
             margin-left: 10px;
         }

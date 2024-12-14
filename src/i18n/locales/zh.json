@@ -47,7 +47,7 @@
         "notSupportEditing": "不支持编辑查看",
         "removedTip": "文档已被删除",
         "close": "关闭",
-        "closeAllDocs": "关闭所有",
+        "closeAllDocs": "关闭所有文档",
         "closeOtherDocs": "关闭其它",
         "newOrOpen": "新建 / 打开"
     },

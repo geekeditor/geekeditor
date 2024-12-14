@@ -111,7 +111,7 @@ export default class WinTab extends Component<{
         const {confirmLoading} = this.state;
         const isActive = activeTabID === tab.id;
         const title = tab.node.title;
-        const Header = <WinTabHeaderDoc wrapClassName={activeTabID === tab.id ? "active" : ""} node={tab.node} /*onRemove={this.onRemove}*/ onChangeTitle={this.onChangeTitle}/>
+        const Header = <WinTabHeaderDoc wrapClassName={activeTabID === tab.id ? "active" : ""} node={tab.node} /*onRemove={this.onRemove}*/ onChangeTitle={this.onChangeTitle} onRemoveCurrent={()=>{}}/>
         const Content = <WinTabContentDoc key={tab.id} wrapClassName={activeTabID === tab.id ? "active" : ""} isActive={isActive} node={tab.node} onOpen={onOpen} onRemoved={()=>onRemove(tab.id)}/>;
         return (
             <>

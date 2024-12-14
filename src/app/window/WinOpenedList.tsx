@@ -6,6 +6,10 @@ import { EWinTabType, IWinTab } from '../../types/win.d';
 import { regexWithSearchKey } from '../../utils/utils'
 import { throttle } from '../../utils/throttle'
 import i18n from '../../i18n';
+import DocsSearchBar from '../../docs/DocsSearchBar';
+import factory from '../../docs/docsprovider/DocsProviderFactory';
+import { ClearOutlined } from '@ant-design/icons';
+import { IDocsNodeBase } from '../../types/docs';
 const { Search } = Input;
 
 export default class WinOpenedList extends Component<{
@@ -14,6 +18,8 @@ export default class WinOpenedList extends Component<{
     onSelect: (tabId: number) => void;
     onRemove: (tabId: number) => void;
     onExchange: (tabID: number, toTabID: number) => void;
+    onRemoveAll: () => void;
+    onOpen: (node: IDocsNodeBase) => void;
 }, {
     searchKey: string;
     dragIndex: number;
@@ -149,38 +155,47 @@ export default class WinOpenedList extends Component<{
     render() {
         const { searchKey, dragIndex, dragToIndex, dragging, dragTab, dragPosition } = this.state;
         const searchRex = regexWithSearchKey(searchKey)
-        const { tabs, activeTabID, onRemove, onSelect } = this.props;
+        const { tabs, activeTabID, onRemove, onSelect, onRemoveAll, onOpen } = this.props;
         const Tabs: React.ReactNode[] = [];
         tabs.forEach((tab, index) => {
             let match;
-                if (!searchKey.length || (match = tab.node.title.match(searchRex))) {
-                    Tabs.push(<div key={tab.id} style={{
-                        transform: dragToIndex >= index && dragIndex < index
-                            ? `translate(0px, -${dragPosition.h}px)`
-                            : dragToIndex <= index && dragIndex > index
-                                ? `translate(0px, ${dragPosition.h}px)`
-                                : ``
-                    }} className={['item-wrap', dragging ? ' item-wrap--dragging' : '', dragging && dragIndex === index ? ' item-wrap--dragging-target' : ''].join('')} onMouseDown={(event) => this.onDragStart(event, index, tab)}><WinOpenedListItem match={match} node={tab.node} wrapClassName={activeTabID === tab.id ? 'active' : ''} onRemove={() => { onRemove(tab.id) }} onSelect={() => { onSelect(tab.id) }} /></div>)
-                }
+            if (!searchKey.length || (match = tab.node.title.match(searchRex))) {
+                Tabs.push(<div key={tab.id} style={{
+                    transform: dragToIndex >= index && dragIndex < index
+                        ? `translate(0px, -${dragPosition.h}px)`
+                        : dragToIndex <= index && dragIndex > index
+                            ? `translate(0px, ${dragPosition.h}px)`
+                            : ``
+                }} className={['item-wrap', dragging ? ' item-wrap--dragging' : '', dragging && dragIndex === index ? ' item-wrap--dragging-target' : ''].join('')} onMouseDown={(event) => this.onDragStart(event, index, tab)}><WinOpenedListItem match={match} node={tab.node} wrapClassName={activeTabID === tab.id ? 'active' : ''} onRemove={() => { onRemove(tab.id) }} onSelect={() => { onSelect(tab.id) }} /></div>)
+            }
         })
+        const root = factory;
         return (
-            <>
-                <div className={["win-opened-list"].join('')}>
-                    <div className="win-opened-list-header">
-                        <Search placeholder={i18n.t("repo.searchOpenedDocs")} onSearch={this.onSearch} onChange={this.onSearchTextChange} />
-                    </div>
-                    
-                    <div className="win-opened-list-body">
-                        {!Tabs.length && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={
-                            <span>
-                                {searchKey.length ? i18n.t("repo.searchNoData") : i18n.t("repo.noOpenedDocs")}
-                            </span>
-                        } />}
-                        {Tabs}
-                        {dragging && !!dragTab && <div key={dragTab.id + '_'} style={{ width: `${dragPosition.w}px`, left: `${dragPosition.x}px`, top: `${dragPosition.y}px` }} className={['item-wrap--drag'].join(' ')}><WinOpenedListItem match={dragTab.node.title.match(searchRex) || undefined} node={dragTab.node} wrapClassName={activeTabID === dragTab.id ? 'active' : ''} onRemove={() => { onRemove(dragTab.id) }} onSelect={() => { onSelect(dragTab.id) }} /></div>}
-                    </div>
+            <div className='win-opened-list-wrapper'>
+                <div className='win-opened-list-main'>
+                    <DocsSearchBar onOpen={onOpen} root={root}>
+                        <div className={["win-opened-list"].join('')}>
+                            {/* <div className="win-opened-list-header">
+                            <Search placeholder={i18n.t("repo.searchDocuments")} onSearch={this.onSearch} onChange={this.onSearchTextChange} />
+                        </div> */}
+
+                            <div className="win-opened-list-body">
+                                {!Tabs.length && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={
+                                    <span>
+                                        {searchKey.length ? i18n.t("repo.searchNoData") : i18n.t("repo.noOpenedDocs")}
+                                    </span>
+                                } />}
+                                {Tabs}
+                                {dragging && !!dragTab && <div key={dragTab.id + '_'} style={{ width: `${dragPosition.w}px`, left: `${dragPosition.x}px`, top: `${dragPosition.y}px` }} className={['item-wrap--drag'].join(' ')}><WinOpenedListItem match={dragTab.node.title.match(searchRex) || undefined} node={dragTab.node} wrapClassName={activeTabID === dragTab.id ? 'active' : ''} onRemove={() => { onRemove(dragTab.id) }} onSelect={() => { onSelect(dragTab.id) }} /></div>}
+                            </div>
+                        </div>
+                    </DocsSearchBar>
                 </div>
-            </>
+                <div className='win-opened-list-footer' onClick={onRemoveAll}>
+                    <ClearOutlined />
+                    <span>{i18n.t("editor.closeAllDocs")}</span>
+                </div>
+            </div>
         )
     }
 }

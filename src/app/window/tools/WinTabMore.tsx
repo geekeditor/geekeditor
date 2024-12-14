@@ -1,15 +1,22 @@
-import React, { ChangeEvent, FormEvent, useRef, useState } from 'react'
-import { MoreOutlined } from "@ant-design/icons"
-import { IDocsNodeBase } from "../../../types/docs.d";
-import sharedEventBus from "../../../utils/sharedEventBus";
+import React, { useState } from 'react'
+import { MoreOutlined } from "@ant-design/icons";
 import { Popover } from 'antd';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, withTranslation } from 'react-i18next';
 import MenuItem from '../../../widgets/MenuItem';
-import i18n from '../../../i18n';
+import WinOpenedList from '../WinOpenedList';
+import { IWinTab } from '../../../types/win';
+import { IDocsNodeBase } from '../../../types/docs';
 
 
-const WinTabMore: React.FC<{ onRemoveCurrent: () => void, onRemoveAll: () => void,
-    onRemoveOthers: () => void, }> = function (props) {
+const WinTabMore: React.FC<{
+    onRemoveCurrent: () => void, onRemoveAll: () => void,
+    onRemoveOthers: () => void, onSelect: (tabId: number) => void;
+    onRemove: (tabId: number) => void; onExchange: (tabID: number, toTabID: number) => void; tabs: IWinTab[];
+    activeTabID: number;
+    onOpen: (node: IDocsNodeBase) => void;
+}> = function (props) {
+
+    const { tabs, activeTabID, onRemove, onExchange, onSelect, onOpen } = props;
     const { t } = useTranslation();
     const [moreBarVisible, onMoreBarVisible] = useState(false)
 
@@ -17,33 +24,33 @@ const WinTabMore: React.FC<{ onRemoveCurrent: () => void, onRemoveAll: () => voi
         props.onRemoveCurrent();
     }
 
-    const onRemoveAll = ()=>{
+    const onRemoveAll = () => {
         props.onRemoveAll();
         onMoreBarVisible(false);
     }
 
-    const onRemoveOthers = ()=>{
+    const onRemoveOthers = () => {
         props.onRemoveOthers();
         onMoreBarVisible(false)
     }
 
-    const onAdd = () => {
-        onMoreBarVisible(false)
-        sharedEventBus.trigger('onAdd');
-    }
-
     const moreList =
         (<div className="more-nodes">
-            <MenuItem name={i18n.t("editor.close")} icon={null} onClick={onRemoveCurrent} />
-            <MenuItem name={i18n.t("editor.closeAllDocs")} icon={null} onClick={onRemoveAll} />
-            <MenuItem name={i18n.t("editor.closeOtherDocs")} icon={null} onClick={onRemoveOthers} />
+            <MenuItem name={t("editor.close")} icon={null} onClick={onRemoveCurrent} />
+            <MenuItem name={t("editor.closeAllDocs")} icon={null} onClick={onRemoveAll} />
+            <MenuItem name={t("editor.closeOtherDocs")} icon={null} onClick={onRemoveOthers} />
         </div>);
 
-    
+    const content =
+        (<div className="opened-nodes">
+            <WinOpenedList tabs={tabs} onSelect={onSelect} onRemove={onRemove} onOpen={onOpen} onExchange={onExchange} activeTabID={activeTabID} onRemoveAll={onRemoveAll}/>
+        </div>);
+
+
     return <>
-        <Popover placement="bottomLeft" open={moreBarVisible} onOpenChange={onMoreBarVisible} content={moreList} trigger="click" destroyTooltipOnHide={{ keepParent: false }}>
+        <Popover overlayClassName='win-tab-more-popover' placement="bottom" open={moreBarVisible} onOpenChange={onMoreBarVisible} content={content} trigger="click" destroyTooltipOnHide={{ keepParent: false }}>
             <span className={["win-tab-bar__op win-tab-bar__op--more", moreBarVisible ? " active" : ""].join("")} ><MoreOutlined /></span>
         </Popover>
     </>
 }
-export default WinTabMore
+export default withTranslation()(WinTabMore)

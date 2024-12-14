@@ -130,7 +130,8 @@
     }
 
     &:hover>div>.docs-node__nav .docs-node__ops,
-    &.active>div>.docs-node__nav>.docs-node__ops {
+    &.active>div>.docs-node__nav>.docs-node__ops,
+    &.show-more>div>.docs-node__nav .docs-node__ops {
         display: flex;
     }
 
@@ -228,4 +229,17 @@
         }
     }
 
+}
+
+.docs-node-more-popover {
+    padding-top: 5px !important;
+    .ant-popover-inner-content {
+        padding: 5px 0px;
+    }
+
+    .ant-menu-item {
+        margin: auto 0px !important;
+        line-height: 35px !important;
+        height: 35px !important;
+    }
 }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { EWinTabType, IWinTab } from '../../types/win.d'
-import WinTab from './WinTab'
-import { PlusOutlined, LeftOutlined, RightOutlined, LoadingOutlined, EllipsisOutlined, ExclamationCircleOutlined, CloseOutlined, DownOutlined, MenuFoldOutlined, MenuOutlined, ExportOutlined, SearchOutlined, AimOutlined, SwapOutlined, MenuUnfoldOutlined, FormatPainterOutlined } from "@ant-design/icons"
-import { Button, Dropdown, Menu } from 'antd'
+import { ExclamationCircleOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons"
+import { Button } from 'antd'
 import { IDocsNode, IDocsNodeBase } from '../../types/docs';
 
 import { throttle } from "../../utils/throttle"
@@ -16,7 +15,6 @@ import WinTabSearch from './tools/WinTabSearch'
 import WinTabExport from './tools/WinTabExport'
 import WinTabStack from './tools/WinTabStack'
 import WinTabMore from './tools/WinTabMore'
-import WinTabAdd from './tools/WinTabAdd'
 
 
 const maxLiveTabCount = 10;
@@ -439,12 +437,12 @@ export default class WinTabBar extends Component<{
                         <div className="win-tab-bar__ops left">
                             <span className={["win-tab-bar__op"].join(' ')} onMouseDown={this.onTriggerAppSideBar}>{showAppSideBar ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}</span>
                             <WinTabStack onBack={this.onBack} onNext={this.onNext} canBack={canBack} canNext={canNext} />
-                            <WinTabAdd onOpen={this.onOpen} />
+                            {/* <WinTabAdd onOpen={this.onOpen} /> */}
+                            <WinTabMore activeTabID={activeTabID} tabs={tabs} onOpen={this.onOpen} onRemove={this.onRemove} onSelect={this.onSelect} onExchange={onWinTabExchange} onRemoveCurrent={this.onRemoveCurrent} onRemoveAll={onWinTabRemoveAll} onRemoveOthers={onWinTabRemoveOthers} />
                             
-                            {tabs.length > 0 && <WinTabs activeTabID={activeTabID} tabs={tabs} onOpen={this.onOpen} onRemove={this.onRemove} onChangeTitle={this.onChangeTitle} onSelect={this.onSelect} onExchange={onWinTabExchange} onRemoveAll={onWinTabRemoveAll} onRemoveOthers={onWinTabRemoveOthers} />}
+                            {tabs.length > 0 && <WinTabs activeTabID={activeTabID} tabs={tabs} onOpen={this.onOpen} onRemove={this.onRemove} onChangeTitle={this.onChangeTitle} onRemoveCurrent={this.onRemoveCurrent}/>}
                         </div>
                         <div className={["win-tab-bar__docs"].join("")} ref={this.swiperReady}>
-                            {/* <div className='win-tab-bar__current-doc'>第一章 如何写作 <span><AimOutlined /></span></div> */}
                             {/* {Tabs} */}
                         </div>
                         <div className="win-tab-bar__ops right">
@@ -454,7 +452,7 @@ export default class WinTabBar extends Component<{
                             {activeTab && <WinTabSearch node={activeTab.node as IDocsNode} />}
                             {/* <span id="app-guide-more" className={["win-tab-bar__op", typoMode ? 'active' : ''].join(' ')} onMouseDown={onTriggerTypoMode}><FormatPainterOutlined /></span>  */}
                             {activeTab && <WinTabExport node={activeTab.node as IDocsNode} />}
-                            {activeTab && <WinTabMore onRemoveCurrent={this.onRemoveCurrent} onRemoveAll={onWinTabRemoveAll} onRemoveOthers={onWinTabRemoveOthers} />}
+                            {/* {activeTab && <WinTabMore activeTabID={activeTabID} tabs={tabs} onRemove={this.onRemove} onSelect={this.onSelect} onExchange={onWinTabExchange} onRemoveCurrent={this.onRemoveCurrent} onRemoveAll={onWinTabRemoveAll} onRemoveOthers={onWinTabRemoveOthers} />} */}
                             {/* {<span id="app-guide-more" className={["win-tab-bar__op", sideBarOpened ? 'active' : ''].join(' ')} onMouseDown={onTriggerSideBar}><EllipsisOutlined /></span>} */}
                         </div>
                     </div>

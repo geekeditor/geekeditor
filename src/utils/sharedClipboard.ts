@@ -15,8 +15,8 @@ class SharedClipboard {
     canPasteTo(node?: IDocsNodeBase) {
         if(!node) return false;
         
-        if (node.nodeType === EDocsNodeType.EDocsNodeTypeDir && this._node) {
-            const children = node.children;
+        if (this._node && !node.isConfig) {
+            const children = node.children || [];
 
             const hasNode = children.find((n) => n === this._node)
             return !hasNode;
@@ -28,14 +28,20 @@ class SharedClipboard {
     async pasteTo(node: IDocsNodeBase) {
         if (this._node) {
             const nodeType = EDocsNodeType.EDocsNodeTypeDoc;
+            if(!node.isLoaded) {
+                await node.load()
+            } else if (!node.isContentLoaded && node.loadContent) {
+                await node.loadContent()
+            }
+            
             const children = node.children;
 
             if (!this.canPasteTo(node)) {
                 return;
             }
 
-            if (!this._node.isLoaded) {
-                await this._node.load()
+            if (!this._node.isContentLoaded && this._node.loadContent) {
+                await this._node.loadContent()
             }
 
 

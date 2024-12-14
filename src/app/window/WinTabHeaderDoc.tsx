@@ -7,6 +7,7 @@ export default class WinTabBarItem extends Component<{
     node: IDocsNodeBase;
     wrapClassName?: string;
     onChangeTitle: Function;
+    onRemoveCurrent: () => void,
 }, {
     titleEditing: boolean
 }> {
@@ -41,6 +42,10 @@ export default class WinTabBarItem extends Component<{
     }
 
     onEditTitleBegin = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        const { node } = this.props;
+        if(node.isConfig) {
+            return;
+        }
         this.setState({
             titleEditing: true
         })
@@ -76,22 +81,21 @@ export default class WinTabBarItem extends Component<{
     }
 
     render() {
-        const { node } = this.props;
+        const { node, onRemoveCurrent } = this.props;
         const title = node.isConfig ? node.title : node.title || 'Untitled';
         const extension = node.extension||'';
         const { titleEditing } = this.state;
         const wrapClassName = this.props.wrapClassName || '';
         const changed = node.isChanged;
         const isLoading = node.isSaving || node.isLoading || node.isRemoving;
-        const isConfig = !!node.isConfig
         return (
             <div className={["win-tab-header win-tab-header--doc", wrapClassName].join(" ")}>
                 <span className={["win-tab-header-op left", titleEditing ? " win-tab-header-op__editing" : ""].join("")} onMouseDown={(e) => { e.stopPropagation(); }}>
                     {isLoading && <span className="win-tab-header-op-saving"><LoadingOutlined /></span>}
-                    {!isLoading && !isConfig && <span className="win-tab-header-op-edit"><EditOutlined onClick={this.onEditTitleBegin} /></span>}
+                    {!isLoading && <span className="win-tab-header-op-close"><CloseOutlined onClick={onRemoveCurrent} /></span>}
                 </span>
                 {!titleEditing &&
-                    <span title={title}>
+                    <span title={title} onClick={this.onEditTitleBegin}>
                         {title}<span className="win-tab-header-extension">{extension}</span>
                     </span>}
                 {titleEditing && <TextEdit text={title} onFinishing={this.onEditTitleFinish} />}

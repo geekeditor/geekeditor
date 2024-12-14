@@ -1,8 +1,8 @@
 import React, { Component, DragEvent } from "react"
 import { EDocsNodeType, IDocsNodeBase, EDocsNodeChangeType, EDocsProviderType, EDocsNodeBaseStatus } from "../types/docs.d"
-import { LoadingOutlined, FolderOpenOutlined, FolderOutlined, FolderAddOutlined, FileAddOutlined, ReloadOutlined, FileTextOutlined, ForkOutlined, DownOutlined, ExclamationCircleOutlined, FileMarkdownOutlined, RightOutlined } from '@ant-design/icons'
+import { LoadingOutlined, FolderOpenOutlined, FolderOutlined, FolderAddOutlined, FileAddOutlined, ReloadOutlined, FileTextOutlined, ForkOutlined, DownOutlined, ExclamationCircleOutlined, FileMarkdownOutlined, RightOutlined, MoreOutlined } from '@ant-design/icons'
 import BarItem from '../widgets/BarItem'
-import { Dropdown, Empty, Menu, Popconfirm, Button } from 'antd';
+import { Dropdown, Empty, Menu, Popconfirm, Button, Popover } from 'antd';
 import TransitionModal from '../widgets/TransitionModal'
 import './DocsNode.less'
 import DocsNodeEdit from '../widgets/TextEdit'
@@ -32,6 +32,7 @@ export default class DocsNode extends Component<{
     nodeId: string;
     dragging: boolean;
     addNodeType: EDocsNodeType;
+    moreBarVisible: boolean;
 }> {
 
     private deleteModal!: TransitionModal | null;
@@ -50,7 +51,8 @@ export default class DocsNode extends Component<{
             transformLoading: false,
             nodeId: '',
             dragging: false,
-            addNodeType: EDocsNodeType.EDocsNodeTypeDoc
+            addNodeType: EDocsNodeType.EDocsNodeTypeDoc,
+            moreBarVisible: false,
         }
     }
 
@@ -303,9 +305,7 @@ export default class DocsNode extends Component<{
         } else if (e.key === 'delete') {
             this.onShowConfirmModal();
         } else if (e.key === 'refresh') {
-            const { node } = this.props;
-            node.load(true).then((success) => {
-            })
+            this.onReload()
         } else if(e.key === 'filter') {
             
             if(onSetFilterNode) {
@@ -317,7 +317,7 @@ export default class DocsNode extends Component<{
         } else if(e.key === 'cut') {
             sharedClipboard.toCut(node);
         } else if(e.key === 'paste') {
-            const target = node.nodeType === EDocsNodeType.EDocsNodeTypeDir ? node : node.parentNode;
+            const target =  node;
             if(target) {
                 sharedClipboard.pasteTo(target);
             }
@@ -467,6 +467,12 @@ export default class DocsNode extends Component<{
         this.props.node.dropType = 0
     }
 
+    onMoreBarVisible = (visible: boolean) => {
+        this.setState({
+            moreBarVisible: visible
+        })
+    }
+
     componentDidMount() {
         const { node } = this.props;
         this.setState({
@@ -488,7 +494,7 @@ export default class DocsNode extends Component<{
         const { node, activeNode, onActiveNode, onOpen, noHeader, onSetFilterNode } = this.props;
         const hideOps = this.props.hideOps;
         const onlyFolder = this.props.onlyFolder;
-        const { expand, addNodeEditing, addNodeType, addNodeDroping, titleEditing, confirmLoading, transformLoading, nodeId, dragging } = this.state;
+        const { expand, addNodeEditing, addNodeType, addNodeDroping, titleEditing, confirmLoading, transformLoading, nodeId, dragging, moreBarVisible } = this.state;
         const isLoading = node.isSaving || node.isLoading || node.isRemoving || node.isMoving || confirmLoading || transformLoading;
         const title = node.title;
         const extension = (node.extension || '');
@@ -508,14 +514,14 @@ export default class DocsNode extends Component<{
         const deleteTitle = i18n.t( isRoot ? "repo.removeRepositoryConfirm" : isFolder ? "repo.deleteFolderConfirm" : "repo.deleteFile")
         const deleteFolderTip = i18n.t(isRoot ? "repo.removeRepositoryTip" : isFolder ?  "repo.deleteFolderTip" : "repo.deleteFileTip")
         const cutStatus = node.status === EDocsNodeBaseStatus.EDocsNodeBaseStatusCut;
-        const target = isFolder ? node : node.parentNode;
+        const target = node;
         const canPaste = sharedClipboard.canPasteTo(target);
         const isDeprecated = node.deprecated;
         const hasChildren = !!node.hasChildren;
 
         const menu = (
             <Menu onClick={this.onContextMenuClick}>
-                
+                {supportReload && <Menu.Item key="refresh">{i18n.t("common.refresh")}</Menu.Item>}
                 {canPaste && <Menu.Item key="paste">{i18n.t("common.paste")}</Menu.Item>}
                 {!isFolder && <Menu.Item key="copyLink">{i18n.t("common.copyLink")}</Menu.Item>}
                 {!isFolder && <Menu.Item key="copy">{i18n.t("common.copy")}</Menu.Item>}
@@ -534,9 +540,8 @@ export default class DocsNode extends Component<{
         const providerIcon  =  isRoot && getProviderTypeIcon(node.providerType) ;
         return (
             <>
-                <div data-node-id={nodeId} className={["docs-node", isFolder ? " docs-node--folder" : "", isActive ? " active" : "", cutStatus ? " docs-node--cutting" : "", isDeprecated ? " docs-node--deprecated": "", dropType ? " docs-node--drop-target" : "", dropTypeClass].join("")} onContextMenu={(e) => { this.onActive(e); e.preventDefault(); e.stopPropagation(); }} onDragEnter={this.onDragEnter}>
-                    {!noHeader &&<Dropdown transitionName="" overlay={menu} trigger={['contextMenu']} >
-                        <div>
+                <div data-node-id={nodeId} className={["docs-node", isFolder ? " docs-node--folder" : "", isActive ? " active" : "", moreBarVisible ? " show-more" : "", cutStatus ? " docs-node--cutting" : "", isDeprecated ? " docs-node--deprecated": "", dropType ? " docs-node--drop-target" : "", dropTypeClass].join("")} onContextMenu={(e) => { this.onActive(e); e.preventDefault(); e.stopPropagation(); }} onDragEnter={this.onDragEnter}>
+                    {!noHeader && <div>
                             {!titleEditing &&
                                 <div className="docs-node__nav" onClick={this.onActive} draggable={canMove} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave}>
                                     {!isFolder && hasChildren && <span onClick={(e)=>{e.stopPropagation();this.onExpand()}} className="docs-node__expand">{expand ? <DownOutlined /> : <RightOutlined />}</span>}
@@ -549,21 +554,18 @@ export default class DocsNode extends Component<{
                                     {!hideOps && !loading && <div className="docs-node__ops">
                                         {supportFile && <BarItem wrapClassName="app-guide-newfile" disabled={isLoading} onClick={() => { this.onCreateNode(EDocsNodeType.EDocsNodeTypeDoc) }} icon={<FileAddOutlined />} />}
                                         {supportFolder && <BarItem wrapClassName="app-guide-newfolder" disabled={isLoading} onClick={() => { this.onCreateNode(EDocsNodeType.EDocsNodeTypeDir) }} icon={<FolderAddOutlined />} />}
-                                        {supportReload && <BarItem wrapClassName="app-guide-refresh" disabled={isLoading} onClick={this.onReload} icon={<ReloadOutlined />} />}
+                            
+                                        <Dropdown transitionName="" overlay={menu} trigger={['click']} onOpenChange={this.onMoreBarVisible}>
+                                            <BarItem wrapClassName="app-guide-more" disabled={isLoading} icon={<MoreOutlined />} />
+                                        </Dropdown>
                                         {/* {!isFolder && <BarItem onClick={this.onReload} icon={<EditOutlined />} />} */}
                                     </div>}
                                 </div>}
                         </div>
-                    </Dropdown>
                     }
                     {titleEditing && <div className="docs-node__title-editing"><DocsNodeEdit text={title} onFinishing={this.onTitleEditing} /><div className="docs-node__title-editing-extension">{extension}</div></div>}
                     <div className={["docs-node__content", (addNodeEditing || Nodes.length) && !noHeader ? ' padding' : ''].join('')} style={{ display: expand && !dragging ? `block` : `none` }}>
                             {addNodeEditing && <div className="docs-node__adding"><DocsNodeEdit text="" onFinishing={this.onAddNoteEditing} /><div className="docs-node__title-editing-extension">{addExtension}</div></div>}
-                            {/* {isRoot && !onlyFolder && !titleEditing && !addNodeEditing && !isLoading && !Nodes.length && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={
-                            <span>
-                                暂无文档，<span className="docs-node__new" onClick={() => { this.onCreateNode(EDocsNodeType.EDocsNodeTypeDoc) }}>新建</span>
-                            </span>
-                        } />} */}
                             {Nodes}
                     </div>
                 </div>
@@ -590,29 +592,6 @@ export default class DocsNode extends Component<{
                         </div>
                     </div>
                 </TransitionModal>
-                {/* <TransitionModal
-                    ref={(modal) => { this.transformModal = modal }}
-                    title={null}
-                    footer={<div className="alert-modal__footer"><div className="alert-modal__footer-right"><Button onClick={this.onHideTransformModal}>取消</Button><Button type="primary" danger onClick={this.onConfirmTransform} loading={transformLoading}>转换并打开</Button></div></div>}
-                    closable={false}
-                    width={300}
-                    top="-300px"
-                    maskStyle={{ backgroundColor: 'transparent' }}
-                    destroyOnClose={true}
-                    transitionName=""
-                    maskTransitionName=""
-                    wrapClassName="alert-modal"
-                >
-                    <div className="alert-modal__content">
-                        <div className="alert-modal__title">
-                            <ExclamationCircleOutlined className="alert-modal__icon" />
-                            <span>是否转换新格式并打开文档? </span>
-                        </div>
-                        <div className="alert-modal__info">
-                            <span>该文档为旧版格式，不支持编辑。转换新格式后，可支持无图床插入图片。</span>
-                        </div>
-                    </div>
-                </TransitionModal> */}
             </>
 
         )
