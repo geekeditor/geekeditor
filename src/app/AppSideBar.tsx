@@ -60,6 +60,10 @@ export default class AppSideBar extends Component<{
         sharedEventBus.trigger('onOpen', node);
     }
 
+    onHide = () => {
+        this.props.onShowAppSideBar(false);
+    }
+
     componentDidMount() {
         
         
@@ -94,7 +98,8 @@ export default class AppSideBar extends Component<{
        
         return (
             <>
-                <div className="app-side-bar" style={{ width: !showAppSideBar ? `0px` : `${sideBarWidth}px`, borderWidth: !showAppSideBar ? `0px` : `0px`, opacity: !showAppSideBar ? `0` : `1`  }}>
+                {showAppSideBar && <div className="app-side-bar-mask" onClick={this.onHide}></div>}
+                <div className={["app-side-bar", showAppSideBar ? " app-side-bar--show" : ""].join("")} style={{ width: `${sideBarWidth}px`, left: !showAppSideBar ? `${-sideBarWidth}px` :  "0px" }}>
                     <div className="app-side-bar-nav">
                         <div className="app-side-bar-nav__left">
                             {/* <BarItem id="app-guide-new" icon={<SisternodeOutlined />} onClick={this.onAddDocRepo}  tip="添加存储仓库" placement="right" wrapClassName="app-bar-item" /> */}

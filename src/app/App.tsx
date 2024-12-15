@@ -150,7 +150,7 @@ class App extends Component<WithTranslation, {
         return (
             <div className={["app", isElectron ? " app--electron" : "", isMac ? " app--mac" : ""].join('')} onMouseMove={this.onPreload}>
                 {/* {isElectron && <AppTopBar activeNode={activeTabNode}/>} */}
-                <div className="app-main">
+                <div className={["app-main", showAppSideBar ? " app-main--sidebar" : ""].join("")}>
                     <AppSideBar showAppSideBar={showAppSideBar} onShowAppSideBar={this.onShowAppSideBar} sideBarWidth={sideBarWidth} sketchBar={Sketch} onActiveNode={this.onActiveNode} />
                     <div className="app-wins" style={{ width: `calc(100% - ${sideBarWidth}px)` }}>
                         <AppWinBar onActiveTab={this.onActiveTab} showAppSideBar={showAppSideBar} onShowAppSideBar={this.onShowAppSideBar} />

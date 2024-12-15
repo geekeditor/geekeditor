@@ -84,7 +84,7 @@ class Docs extends Component<{
             (<div className="docs-bar-folder-nodes">
                 <DocsNodesBar onlyFolder={true} showRoot={true} root={root} onActiveNode={this.onFilterNode} defaultActiveNode={filterNode} onOpen={onOpen} />
             </div>);
-        const toolbar = <Popover placement="rightTop" content={content} trigger="hover">
+        const toolbar = <Popover placement="rightTop" content={content} trigger="click">
             <div className="docs-bar-filter" onContextMenu={(e) => { e.preventDefault(); e.stopPropagation(); }} >
                 <PushpinOutlined />
                 <div className="docs-bar-filter-title">{filterFolderTitle}</div>
