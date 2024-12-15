@@ -47,8 +47,8 @@ class AppTabStatusBar extends Component<{
         return (
             <div className="win-tab-status-bar">
                 <DocsNodePathBar onOpen={onOpen} node={node} />
-                {!isConfig && <div className="win-tab-status-bar-words">{t("repo.words")}:{wordCount}</div>}
                 <div className="win-tab-status-bar-tools">
+                    {!isConfig && <div className="win-tab-status-bar-words">{t("repo.words")}:{wordCount}</div>}
                     <WinTabFocusMode />
                     <WinTabZen />
                 </div>

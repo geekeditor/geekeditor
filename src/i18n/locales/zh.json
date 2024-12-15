@@ -141,7 +141,7 @@
         "deleteFolderTip": "文件夹将从列表移除，但文件夹下文档扔保留",
         "deleteFile": "确定删除文件",
         "deleteFileTip": "文件将从仓库删除，删除后不能找回",
-        "words": "字数",
+        "words": "字",
         "docsifyConfigFiles": "Docsify 配置文件",
         "noConfigs": "不支持创建部署配置文件"
     },
