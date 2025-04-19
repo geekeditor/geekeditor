@@ -223,7 +223,10 @@ class AppVIP extends Component<{
     render() {
         const { subscribeWay, bindLoading, loading, vips, selectVip, createdOrder, createLoading, invalidPayQrcode } = this.state;
         const { vip } = this.props;
+        
         const VIPS = vips.map((vip) => {
+            const years = Math.floor(vip.duration / (365 * 24 * 3600));
+            const months = Math.floor(vip.duration / (30 * 24 * 3600));
             return <div className={["vip-pay__option", vip.id === selectVip ? 'vip-pay__option--active' : ''].join(' ')} key={vip.id} onClick={() => { this.onChangeVip(vip.id) }}>
                 {vip.total_fee !== vip.discount_fee && <div className="vip-pay__totalfee">
                     ￥<span className="vip-pay__count">{vip.total_fee / 100.0}</span>
@@ -235,7 +238,7 @@ class AppVIP extends Component<{
                     约<span className="vip-pay__count">{(vip.discount_fee / (100.0 * vip.duration / (24 * 3600))).toFixed(2)}</span>元/天
                 </div>
                 <div className="vip-pay__duration">
-                    <span className="vip-pay__count">{Math.floor(vip.duration / (365 * 24 * 3600))}</span>年
+                    <span className="vip-pay__count">{years > 0 ? years : months > 0 ? months : (Math.floor(vip.duration / (24 * 3600)))}</span>{years > 0 ? '年' : months > 0 ? '月' : '天'}
                 </div>
                 <div className="vip-pay__mark">
                     {vip.mark}

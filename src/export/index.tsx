@@ -4,7 +4,6 @@ import "./index.less"
 
 import TransitionModal from "../widgets/TransitionModal";
 import ExportController from "./Controller";
-import { title } from "process";
 import i18n from "../i18n";
 
 const TypeTitles:{[key: string]: string} = {
