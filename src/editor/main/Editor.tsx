@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import MEditable, { MEPluginBubbleToolbar } from '@geekeditor/meditable';
 import './Editor.less'
 import './assets/style.less'
-import MEditable from '@geekeditor/meditable';
 import '@geekeditor/meditable/dist/assets/meditable.css'
 import { IDocsNodeBase } from '../../types/docs';
+
+MEditable.use(MEPluginBubbleToolbar);
 
 export default class Editor extends Component<{
     customToolbar?: React.ReactNode;
