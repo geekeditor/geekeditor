@@ -110,7 +110,8 @@ export default class GitlabData extends GithubData {
         const response: any = await this.CRUD.put(this.getFileURL(contentPath), token, {
             "commit_message": "create action",
             "encoding": "base64",
-            "content": Base64.encode(content||'')
+            "content": Base64.encode(content||''),
+            "branch": this._branch
         })
         if (!response || response.status < 200 || response.status > 400) {
             return;
@@ -130,7 +131,8 @@ export default class GitlabData extends GithubData {
         const response: any = await this.CRUD.put(this.getFileURL(contentPath), token, {
             "commit_message": "update action",
             "encoding": "base64",
-            "content": Base64.encode(content||'')
+            "content": Base64.encode(content||''),
+            "branch": this._branch
         }, exist)
         if (!response || response.status < 200 || response.status > 400) {
             return;
@@ -213,7 +215,8 @@ export default class GitlabData extends GithubData {
                     this.CRUD.put(this.getFileURL(assetPath), token, {
                         "commit_message": "upload action",
                         "encoding": "base64",
-                        "content": content
+                        "content": content,
+                        "branch": this._branch
                     }).then((response: any) => {
                         if (response.status >= 200 && response.status <= 400) {
                             resolve({
@@ -282,7 +285,8 @@ export default class GitlabData extends GithubData {
         return this.CRUD.put(this.getFileURL(contentPath), token, {
             "commit_message": "update action",
             "encoding": "base64",
-            "content": Base64.encode(content)
+            "content": Base64.encode(content),
+            "branch": this._branch
         }, exist).then((response: any) => {
             if (response.status >= 200 && response.status <= 400) {
                 const c: IGitlabPutResData = response.data;
@@ -315,7 +319,8 @@ export default class GitlabData extends GithubData {
         const response: any = await this.CRUD.put(this.getFileURL(contentPath), token, {
             "commit_message": "create action",
             "encoding": "base64",
-            "content": Base64.encode(content||'')
+            "content": Base64.encode(content||''),
+            "branch": this._branch
         })
         if (!response || response.status < 200 || response.status > 400) {
             return;
@@ -376,7 +381,8 @@ export default class GitlabData extends GithubData {
         return  this.CRUD.put(this.getFileURL(indPath), token, {
             "commit_message": "update action",
             "encoding": "base64",
-            "content": Base64.encode(stringifyDocsIndex(docsIndex))
+            "content": Base64.encode(stringifyDocsIndex(docsIndex)),
+            "branch": this._branch
         }, exist).then((response: any) => {
             if (response.status >= 200 && response.status <= 400) {
                 const c: IGitlabPutResData = response.data;

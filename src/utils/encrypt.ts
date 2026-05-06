@@ -17,7 +17,14 @@ export function getCanvasFingerprint() {
         context.font = "18pt Arial";
         context.textBaseline = "top";
         context.fillText("GeekEditor", 2, 2);
-        return CryptoJS.MD5(canvas.toDataURL("image/jpeg")).toString();
+
+        const fingerprint = [
+            navigator.userAgent,
+            window.screen.width + 'x' + window.screen.height,
+            new Date().getTimezoneOffset(),
+            canvas.toDataURL("image/png") // PNG无损压缩，减少差异
+        ].join('|');
+        return CryptoJS.MD5(fingerprint).toString();
     }
 
     return `geekeditor`
